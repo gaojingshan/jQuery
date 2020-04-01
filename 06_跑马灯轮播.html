@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 900px;
+            height: 500px;
+            margin: 40px auto;
+            border: 1px solid aqua;
+            overflow: hidden;
+        }
+
+        .carousel ul {
+            width: 20000px;
+            list-style: none;
+            position: relative;
+        }
+
+        .carousel ul li {
+            float: left;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        .leftBtn {
+            left: 10px;
+        }
+
+        .rightBtn {
+            right: 10px;
+        }
+
+        .carousel ol {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            list-style: none;
+        }
+
+        .carousel ol li {
+            float: left;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: orange;
+            cursor: pointer;
+        }
+
+        .carousel ol li.cur {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel" id="carousel">
+        <ul>
+            <li><img src="images/0.jpg" alt=""></li>
+            <li><img src="images/1.jpg" alt=""></li>
+            <li><img src="images/2.jpg" alt=""></li>
+            <li><img src="images/3.jpg" alt=""></li>
+            <li><img src="images/4.jpg" alt=""></li>
+            <li><img src="images/5.jpg" alt=""></li>
+            <li><img src="images/6.jpg" alt=""></li>
+            <li><img src="images/7.jpg" alt=""></li>
+            <li><img src="images/8.jpg" alt=""></li>
+            <li><img src="images/9.jpg" alt=""></li>
+        </ul>
+        <a href="javascript:;" id="leftBtn" class="leftBtn btn"></a>
+        <a href="javascript:;" id="rightBtn" class="rightBtn btn"></a>
+        <ol>
+            <li class="cur"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 克隆第一个li，追加到最后
+        $('#carousel ul li').eq(0).clone().appendTo('#carousel ul');
+
+        // 信号量
+        var idx = 0;
+        // 点击左按钮
+        $('#leftBtn').click(function () {
+            // 如果ul正在进行动画，则什么也不做
+            if ($('#carousel ul').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+            // 一上来就要考虑猫腻
+            if (idx == 0) {
+                // 如果idx现在是0，那么就变为10，就是变为猫腻那张图
+                idx = 10;
+                // css是瞬移，移动到最后一张图
+                $('#carousel ul').css('left', -900 * 10)
+            }
+            idx--;
+            // 运动用animate函数
+            $('#carousel ul').animate({ left: -900 * idx }, 400)
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            $('#carousel ol li').eq(idx).addClass('cur').siblings().removeClass('cur');
+        })
+        // 点击右按钮
+        $('#rightBtn').click(function () {
+            // 如果ul正在进行动画，则什么也不做
+            if ($('#carousel ul').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+            idx++;
+            // 运动用animate函数
+            $('#carousel ul').animate({ 'left': -900 * idx }, 400, function () {
+                // 回调函数，就是每次动画执行完毕之后，做的事情。
+                // 每次动画执行完毕时候，完毕之后做的事情，必须写在回调函数中。
+                if (idx > 9) {
+                    // 瞬间拉回去即可
+                    idx = 0;
+                    $('#carousel ul').css('left', 0)
+                }
+            })
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            // 为什么要百分号10一下？因为idx是10的时候，就是猫腻，也当做0处理。
+            $('#carousel ol li').eq(idx % 10).addClass('cur').siblings().removeClass('cur');
+        })
+
+        // 点击小圆点做的事情
+        $('#carousel ol li').click(function () {
+            // 这样的写法就表示你点击的小圆点序号
+            idx = $(this).index();
+            // 拉动
+            $('#carousel ul').animate({ 'left': -900 * idx }, 400);
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            $('#carousel ol li').eq(idx).addClass('cur').siblings().removeClass('cur');
+        })
+
+        // 写一个锁，标记用户鼠标是否移动上来了
+        var lock = true;
+        // 定时器
+        setInterval(function () {
+            // 如果锁是开着的，那么就触发右按钮
+            if (lock) {
+                // 触发右按钮
+                $('#rightBtn').trigger('click');
+            }
+        }, 2000)
+        // 鼠标碰到大盒子，就关锁
+        $('#carousel').mouseenter(function () {
+            lock = false;
+        })
+        // 鼠标离开大盒子，就开锁
+        $('#carousel').mouseleave(function () {
+            lock = true;
+        })
+    </script>
+</body>
+
+</html>
