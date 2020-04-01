@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text {
+            font-size: 26px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <button id="big">字号增加</button>
+        <button id="small">字号减小</button>
+    </p>
+    <p id="fsize">当前字号26</p>
+    <p id="text" class="text">一定要加油，不能放弃</p>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var a = 26;
+        $('#big').click(function () {
+            $('#small').attr('disabled', false);
+            a += 2;
+            if (a == 30) {
+                $('#big').attr('disabled', true);
+            }
+            $('#fsize').text('当前字号' + a);
+            $('#text').css('font-size', a + 'px');
+        })
+
+        $('#small').click(function () {
+            $('#big').attr('disabled', false);
+            a -= 2;
+            if (a == 20) {
+                $('#small').attr('disabled', true);
+            }
+            $('#fsize').text('当前字号' + a);
+            $('#text').css('font-size', a + 'px');
+        })
+    </script>
+</body>
+
+</html>
