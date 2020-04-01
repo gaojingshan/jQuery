@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            border: 1px solid orange;
+            margin: 40px auto;
+        }
+
+        .box ul {
+            list-style: none;
+        }
+
+        .box ul li {
+            float: left;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            background-color: orange;
+            cursor: pointer;
+        }
+
+        .box ul li.cur {
+            background-color: red;
+        }
+
+        .box .inn {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+            display: none;
+        }
+
+        .box .inn.cur {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul class="hd">
+            <li class="cur">步骤一</li>
+            <li>步骤二</li>
+            <li>步骤三</li>
+        </ul>
+        <div class="bd">
+            <div class="inn cur">
+                <p>步骤一</p>
+                <p>步骤一</p>
+                <p>步骤一</p>
+            </div>
+            <div class="inn">
+                <p>步骤二</p>
+                <p>步骤二</p>
+                <p>步骤二</p>
+            </div>
+            <div class="inn">
+                <p>步骤三</p>
+                <p>步骤三</p>
+                <p>步骤三</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('#box ul li').mouseenter(function () {
+            // 碰到的li加cur，其他去cur
+            $(this).addClass('cur').siblings().removeClass('cur');
+
+            // 得到你碰到的元素的序号
+            var index = $(this).index();
+
+            // 让下面的inn也是这个序号的，加cur，其他去cur
+            $('.inn').eq(index).addClass('cur').siblings().removeClass('cur');
+        })
+    </script>
+</body>
+
+</html>

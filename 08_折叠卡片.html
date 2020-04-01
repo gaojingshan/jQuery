@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 400px;
+            border: 1px solid #000;
+            margin: 40px auto;
+        }
+
+        .box h3 {
+            background-color: hotpink;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .box .inn {
+            display: none;
+        }
+
+        .box .inn.cur {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <h3>步骤一</h3>
+        <div class="inn cur">
+            <p>内容1</p>
+            <p>内容1</p>
+            <p>内容1</p>
+        </div>
+        <h3>步骤二</h3>
+        <div class="inn">
+            <p>内容2</p>
+            <p>内容2</p>
+            <p>内容2</p>
+        </div>
+        <h3>步骤三</h3>
+        <div class="inn">
+            <p>内容3</p>
+            <p>内容3</p>
+            <p>内容3</p>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('#box h3').click(function () {
+            // 判断下一个兄弟是否可见
+            // 如果下一个兄弟不可见
+            if (!$(this).next().is(':visible')) {
+                // 让你点击的这个h3下一个兄弟.inn展开
+                // 让所有的inn（包括它自己的下一个兄弟)都合起来
+                $('#box .inn').slideUp();
+                // next就是下一个兄弟，slideDown就是展开，300是毫秒数
+                $(this).next().slideDown(300);
+            }else{
+                // 否则就合起来，slideUp就是合起来，300是毫秒数
+                $(this).next().slideUp(300)
+            }
+        })
+    </script>
+</body>
+
+</html>
