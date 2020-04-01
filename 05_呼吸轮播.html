@@ -73,24 +73,34 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        // 信号量
+        // 全局变量，信号量，表示当前显示的图片序号
         var a = 0;
+        // 点击左按钮做的事情
         $('#leftBtn').click(function () {
+            // 让a号li淡出，eq表示序号（从0开始，英语equal的意思），fadeOut表示淡出
             $('#carousel ul li').eq(a).fadeOut(600);
+            // 序号减1
             a -= 1;
+            // 验收
             if (a < 0) {
                 a = 9
             }
+            // 让新的a号li淡入
             $('#carousel ul li').eq(a).fadeIn(600);
 
         })
 
+        // 点击右按钮做的事情
         $('#rightBtn').click(function () {
+            // 让a号li淡出，eq表示序号（从0开始，英语equal的意思），fadeOut表示淡出
             $('#carousel ul li').eq(a).fadeOut(600);
+            // 序号加1
             a += 1;
+            // 验收
             if (a > 9) {
                 a = 0;
             }
+            // 让新的a号li淡入
             $('#carousel ul li').eq(a).fadeIn(600);
         })
 

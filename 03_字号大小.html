@@ -23,24 +23,31 @@
     <script>
         var a = 26;
         $('#big').click(function () {
+            // 字号减小按钮一定能点
             $('#small').attr('disabled', false);
             a += 2;
+            // 验收
             if (a == 30) {
                 $('#big').attr('disabled', true);
             }
-            $('#fsize').text('当前字号' + a);
-            $('#text').css('font-size', a + 'px');
+            render()
         })
 
         $('#small').click(function () {
+            // 字号增加按钮一定能点
             $('#big').attr('disabled', false);
             a -= 2;
+            // 验收
             if (a == 20) {
                 $('#small').attr('disabled', true);
             }
+            render();
+        })
+
+        function render() {
             $('#fsize').text('当前字号' + a);
             $('#text').css('font-size', a + 'px');
-        })
+        }
     </script>
 </body>
 

@@ -25,10 +25,14 @@
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $('#btn1').click(function () {
+            // 选择复选框被勾选的这个li，让这个框去掉对勾，让它的爸爸就是li追加到hate去
+            // 能够连续打点！
             $('#love li input:checked').prop('checked', false).parent().appendTo('#hate');
         })
 
         $('#btn2').click(function () {
+            // 选择复选框被勾选的这个li，让这个框去掉对勾，让它的爸爸就是li追加到love去
+            // 能够连续打点！
             $('#hate li input:checked').prop('checked', false).parent().appendTo('#love');
         })
     </script>

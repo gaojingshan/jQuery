@@ -22,15 +22,19 @@
         $('#kuang').focus();
         // 添加
         $('#add').click(function () {
+            // 得到框的内容
             var zhi = $('#kuang').val();
+            // 创建新li上树
             $('<li>' + zhi + '<button>删除</button></li>').appendTo('#list')
-            // 清除文本框
+            // 清空文本框
             $('#kuang').val('');
             $('#kuang').focus();
         })
 
         // 删除
+        // 事件委托
         $('#list').delegate('button','click',function(){
+            // 删除元素，this是用户点击的按钮，让它的爹li没有
             $(this).parent().remove();
         })
     </script>
