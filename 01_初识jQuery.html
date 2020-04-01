@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            margin-right: 10px;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('ul li').click(function () {
+            // 点击的这个元素进行动画，animate就是动画的意思
+            // 第一个参数就是动画的终点，第二个参数是动画时长
+            $(this).animate({ 'width': 200 }, 2000);
+        })
+    </script>
+</body>
+
+</html>
