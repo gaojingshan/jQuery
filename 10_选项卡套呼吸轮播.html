@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 826px;
+            margin: 40px auto;
+        }
+
+        .box h3 {
+            line-height: 20px;
+            font-weight: normal;
+            font-size: 14px;
+            background: rgb(237, 248, 250) url(images/jia.png) no-repeat 4px center/12px 14px;
+            cursor: pointer;
+            text-indent: 2em;
+        }
+
+        .box h3.cur {
+            color: #099FB0;
+            background: rgb(237, 248, 250);
+            text-indent: 0em;
+
+        }
+
+        .box .inn {
+            width: 826px;
+            height: 300px;
+            display: none;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .box .inn.cur {
+            display: block;
+        }
+
+        .box .inn .inn_l span {
+            display: block;
+            width: 84px;
+            height: 40px;
+            border-radius: 4px;
+            margin: 8px 18px 8px 12px;
+            background-color: #F3F5F6;
+            text-align: center;
+            font-size: 14px;
+            line-height: 40px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .box .inn .inn_l span.cur {
+            background-color: #099FB0;
+            color: #fff;
+            cursor: default;
+        }
+
+        .box .inn .inn_l {
+            float: left;
+        }
+
+        .box .inn .inn_rr {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 712px;
+            height: 320px;
+            background-color: #F8FAFC;
+            float: left;
+            margin-top: 8px;
+            padding-top: 22px;
+            padding-left: 17px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .box .inn .inn_r {
+            width: 712px;
+            height: 320px;
+            background-color: #F8FAFC;
+            float: left;
+            margin-top: 8px;
+            padding-top: 22px;
+            padding-left: 17px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <h3 class="cur">阶段一</h3>
+        <div class="inn cur">
+            <div class="inn_l">
+                <span class='cur'>步骤1</span>
+                <span>步骤2</span>
+                <span>步骤3</span>
+                <span>步骤4</span>
+                <span>步骤5</span>
+            </div>
+            <div class="inn_rr">
+                <div class="inn_r">
+                    阶段一的内容1
+                </div>
+                <div class="inn_r">
+                    阶段一的内容2
+                </div>
+                <div class="inn_r">
+                    阶段一的内容3
+                </div>
+                <div class="inn_r">
+                    阶段一的内容4
+                </div>
+                <div class="inn_r">
+                    阶段一的内容5
+                </div>
+            </div>
+        </div>
+        <h3>阶段二</h3>
+        <div class="inn">
+            <div class="inn_l">
+                <span class='cur'>步骤1</span>
+                <span>步骤2</span>
+                <span>步骤3</span>
+            </div>
+            <div class="inn_rr">
+                <div class="inn_r">
+                    阶段二的内容1
+                </div>
+                <div class="inn_r">
+                    阶段二的内容2
+                </div>
+                <div class="inn_r">
+                    阶段二的内容3
+                </div>
+            </div>
+        </div>
+        <h3>阶段三</h3>
+        <div class="inn">
+            <div class="inn_l">
+                <span class='cur'>步骤1</span>
+                <span>步骤2</span>
+                <span>步骤3</span>
+                <span>步骤4</span>
+            </div>
+            <div class="inn_rr">
+                <div class="inn_r">
+                    阶段三的内容1
+                </div>
+                <div class="inn_r">
+                    阶段三的内容2
+                </div>
+                <div class="inn_r">
+                    阶段三的内容3
+                </div>
+                <div class="inn_r">
+                    阶段三的内容4
+                </div>
+            </div>
+        </div>
+        <h3>阶段四</h3>
+        <div class="inn">
+            <div class="inn_l">
+                <span class='cur'>步骤1</span>
+                <span>步骤2</span>
+                <span>步骤3</span>
+                <span>步骤4</span>
+            </div>
+            <div class="inn_rr">
+                <div class="inn_r">
+                    阶段四的内容1
+                </div>
+                <div class="inn_r">
+                    阶段四的内容2
+                </div>
+                <div class="inn_r">
+                    阶段四的内容3
+                </div>
+                <div class="inn_r">
+                    阶段四的内容4
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 点击的行h3的序号
+        var titleIndex = 0;
+        $('#box h3').click(function () {
+            // console.log();
+            titleIndex = $(this).index() / 2;
+
+            if ($(this).next().is(':visible')) {
+                return;
+            }
+            $(this).addClass('cur').siblings().removeClass('cur');
+            // 点击隐藏加号，其他的显示加号的功能
+            $('#box h3').css('text-indent', '2em');
+            $(this).css('text-indent', '0em');
+            // 当h3点击的时候，子元素span移出，其他span元素添加
+            // $('#box h3').children('span').add();
+            // console.log($(this).children('span')[0]);
+            /* $('#box h3').children('span')[0].add();*/
+            // $(this).children('span')[0].remove(); 
+
+            // 让所有的inn隐藏，移出cur类
+            $('#box .inn').slideUp(300);
+            // 点击的这个元素下一个inn显示，添加cur类
+            $(this).next().slideDown(300);
+        })
+        $('#box .inn span').click(function () {
+            var index = $(this).index();
+            // 判断现在点的元素是不是已经展开，展开的元素不能点（有无cur类）
+            // console.log($('#box .inn').eq(titleIndex).find('span'));
+            if ($('#box .inn').eq(titleIndex).find('span').eq(index).prop('class') == 'cur') {
+                return;
+            }
+    
+            $(this).addClass('cur').siblings().removeClass('cur');
+
+            // console.log($(this).parent().next().children());
+            // 当前阶段的所有inn_r元素淡出
+            $(this).parent().next().children().fadeOut();
+            // 当前阶段点击的span对应的inn_r元素淡入
+            $(this).parent().next().children().eq(index).fadeIn();
+
+        })
+
+
+    </script>
+</body>
+
+</html>
