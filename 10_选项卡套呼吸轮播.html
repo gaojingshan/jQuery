@@ -192,6 +192,7 @@
     <script>
         // 点击的行h3的序号
         var titleIndex = 0;
+        // h3点击
         $('#box h3').click(function () {
             titleIndex = $(this).index() / 2;
             if ($(this).next().is(':visible')) {
@@ -207,9 +208,10 @@
             // 点击的这个元素下一个inn显示，添加cur类
             $(this).next().slideDown(300);
         })
-        $('#box .inn span').click(function () {
+        // 正文里面的步骤点击
+        $('#box .inn .inn_l span').click(function () {
             var index = $(this).index();
-            // 判断现在点的元素是不是已经展开，展开的元素不能点（有无cur类）
+            // 判断现在点的span元素是不是已经展开，展开的元素不能点（有无cur类）
             if ($('#box .inn').eq(titleIndex).find('span').eq(index).prop('class') == 'cur') {
                 return;
             }
