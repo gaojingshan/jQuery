@@ -24,7 +24,8 @@
             list-style: none;
             position: relative;
         }
-        .box ul li{
+
+        .box ul li {
             cursor: pointer;
         }
 
@@ -78,9 +79,9 @@
     <script>
         var index = 0;
         $('#box ol li').mouseenter(function () {
-            /* if($('#box ul').is(':animated')){
+            if ($('#box ul').is(':animated')) {
                 return;
-            } */
+            }
             $(this).addClass('cur').siblings().removeClass('cur');
             // 找序号
             index = $(this).index();
