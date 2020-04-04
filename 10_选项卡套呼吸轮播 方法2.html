@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 360px;
+            margin: 100px auto;
+        }
+
+        .box h3 {
+            background-color: rgb(179, 240, 189);
+            line-height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            padding-left: 20px;
+        }
+
+        .box .inn {
+            overflow: hidden;
+            height: 240px;
+            display: none;
+        }
+
+        .box .inn.no0 {
+            display: block;
+        }
+
+        .box h3 span {
+            display: inline;
+        }
+
+        .box h3.cur span {
+            display: none;
+        }
+
+        .box h3.cur {
+            color: rgb(5, 92, 9);
+        }
+
+        .box .inn .hd {
+            float: left;
+            width: 120px;
+            height: 300px;
+        }
+
+        .box .inn .hd .bar {
+            width: 120px;
+            height: 40px;
+            border: 1px solid rgb(172, 169, 169);
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .box .inn .hd .bar.cur {
+            background-color: orange;
+        }
+
+        .box .inn .bd {
+            float: left;
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .box .inn .bd .con {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 340px;
+            height: 220px;
+            overflow: auto;
+            display: none;
+        }
+
+        .box .inn .bd .con.no0 {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <h3 class="cur"><span>+</span>标题标题标题标题标题</h3>
+        <div class="inn no0">
+            <div class="hd">
+                <div class="bar cur"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="bd">
+                <div class="con no0">
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                </div>
+                <div class="con">
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                </div>
+                <div class="con">
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                </div>
+            </div>
+        </div>
+        <h3><span>+</span>标题标题标题标题标题</h3>
+        <div class="inn no1">
+            <div class="hd">
+                <div class="bar  cur"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="bd">
+                <div class="con no0">
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                </div>
+                <div class="con">
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                </div>
+                <div class="con">
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                </div>
+                <div class="con">
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                </div>
+            </div>
+        </div>
+        <h3><span>+</span>标题标题标题标题标题</h3>
+        <div class="inn no2">
+            <div class="hd">
+                <div class="bar  cur"></div>
+                <div class="bar"></div>
+
+            </div>
+            <div class="bd">
+                <div class="con no0">
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                </div>
+                <div class="con">
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                </div>
+            </div>
+        </div>
+        <h3><span>+</span>标题标题标题标题标题</h3>
+        <div class="inn no3">
+            <div class="hd">
+                <div class="bar  cur"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="bd">
+                <div class="con no0">
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                    <p>哈哈哈哈哈哈哈</p>
+                    <p>哈哈哈哈</p>
+                </div>
+                <div class="con">
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                    <p>嘻嘻嘻嘻嘻</p>
+                    <p>嘻嘻嘻</p>
+                </div>
+                <div class="con">
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                </div>
+                <div class="con">
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦啦啦</p>
+                    <p>啦啦</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('#box h3').click(function () {
+            // 如果你点击的这个h3它下一个inn已经是可见的，那么什么都不做
+            if ($(this).next('.inn').is(':visible')) {
+                return;
+            }
+            // 让当前可视的inn都合起来
+            $('.inn:visible').slideUp(200);
+            // 让当前你点击的这个h3后面一个inn展开
+            $(this).next('.inn').slideDown(200);
+            // 让点击的这个元素加cur
+            $(this).addClass('cur').siblings('h3').removeClass('cur');
+        });
+
+        var inn0 = 0;
+        var inn1 = 0;
+        var inn2 = 0;
+        var inn3 = 0;
+
+        $('.inn.no0 .bar').mouseenter(function () {
+            // 相当于就是一个呼吸轮播
+            $('.inn.no0 .con').eq(inn0).stop(true).fadeOut(100)
+            inn0 = $(this).index();
+            $('.inn.no0 .con').eq(inn0).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.inn.no0 .bar').eq(inn0).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.inn.no1 .bar').mouseenter(function () {
+            // 相当于就是一个呼吸轮播
+            $('.inn.no1 .con').eq(inn1).stop(true).fadeOut(100)
+            inn1 = $(this).index();
+            $('.inn.no1 .con').eq(inn1).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.inn.no1 .bar').eq(inn1).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.inn.no2 .bar').mouseenter(function () {
+            // 相当于就是一个呼吸轮播
+            $('.inn.no2 .con').eq(inn2).stop(true).fadeOut(100)
+            inn2 = $(this).index();
+            $('.inn.no2 .con').eq(inn2).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.inn.no2 .bar').eq(inn2).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.inn.no3 .bar').mouseenter(function () {
+            // 相当于就是一个呼吸轮播
+            $('.inn.no3 .con').eq(inn3).stop(true).fadeOut(100)
+            inn3 = $(this).index();
+            $('.inn.no3 .con').eq(inn3).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.inn.no3 .bar').eq(inn3).addClass('cur').siblings().removeClass('cur');
+        });
+    </script>
+</body>
+
+</html>

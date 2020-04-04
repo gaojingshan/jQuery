@@ -20,17 +20,20 @@
             line-height: 30px;
             font-weight: normal;
             font-size: 14px;
-            background: rgb(237, 248, 250) url(images/jia.png) no-repeat 8px center/12px 14px;
+            background: rgb(237, 248, 250);
+            /*  url(images/jia.png) no-repeat 8px center/12px 14px; */
             cursor: pointer;
-            text-indent: 2em;
             margin-bottom: 8px;
         }
-
+        .box h3 span{
+            display: inline;
+        }
+        .box h3.cur span{
+            display: none;
+        }
         .box h3.cur {
             color: #099FB0;
             background: rgb(237, 248, 250);
-            text-indent: .6em;
-
         }
 
         .box .inn {
@@ -89,13 +92,15 @@
             height: 320px;
             background-color: #F8FAFC;
             float: left;
+            /* 盒子溢出，自动添加滚动条 */
+            overflow: auto;
         }
     </style>
 </head>
 
 <body>
     <div class="box" id="box">
-        <h3 class="cur">阶段一</h3>
+        <h3 class="cur"><span>＋</span>阶段一</h3>
         <div class="inn cur">
             <div class="inn_l">
                 <span class='cur'>步骤1</span>
@@ -122,7 +127,7 @@
                 </div>
             </div>
         </div>
-        <h3>阶段二</h3>
+        <h3><span>＋</span>阶段二</h3>
         <div class="inn">
             <div class="inn_l">
                 <span class='cur'>步骤1</span>
@@ -141,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <h3>阶段三</h3>
+        <h3><span>＋</span>阶段三</h3>
         <div class="inn">
             <div class="inn_l">
                 <span class='cur'>步骤1</span>
@@ -164,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <h3>阶段四</h3>
+        <h3><span>＋</span>阶段四</h3>
         <div class="inn">
             <div class="inn_l">
                 <span class='cur'>步骤1</span>
@@ -198,13 +203,14 @@
             if ($(this).next().is(':visible')) {
                 return;
             }
+            // 让点击的这个元素加cur
             $(this).addClass('cur').siblings().removeClass('cur');
-            // 点击隐藏加号，其他的显示加号的功能
-            $('#box h3').css('text-indent', '2em');
-            $(this).css('text-indent', '.6em');
 
             // 让所有的inn隐藏，移出cur类
             $('#box .inn').slideUp(300);
+            // 让当前可视的inn都合起来
+            // $('.inn:visible').slideUp(200);
+
             // 点击的这个元素下一个inn显示，添加cur类
             $(this).next().slideDown(300);
         })
@@ -220,7 +226,6 @@
             $(this).parent().next().children().fadeOut();
             // 当前阶段点击的span对应的inn_r元素淡入
             $(this).parent().next().children().eq(index).fadeIn();
-
         })
 
 
