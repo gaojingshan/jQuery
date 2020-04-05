@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .roll {
+            position: relative;
+            width: 1276px;
+            height: 474px;
+        }
+
+        .roll ul {
+            list-style: none;
+            width: 1276px;
+            height: 474px;
+            position: relative;
+        }
+
+        .roll ul li {
+            width: 240px;
+            position: absolute;
+            transition: all 1s ease 0s;
+
+        }
+
+        .roll ul img {
+            border-radius: 20px;
+            width: 240px;
+        }
+
+        .no1 {
+            top: 75px;
+            left: 76px;
+            transform: scale(.7);
+        }
+
+        .no2 {
+            top: 70px;
+            left: 290px;
+            transform: scale(.8);
+        }
+
+        .no3 {
+            top: 66px;
+            left: 530px;
+            transform: scale(.9);
+        }
+
+        .no4 {
+            top: 70px;
+            right: 272px;
+            transform: scale(.8);
+        }
+
+        .no5 {
+            top: 75px;
+            right: 60px;
+            transform: scale(.7);
+        }
+
+        .btn {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #aaa;
+            top: 50%;
+            margin-top: 36px;
+            text-decoration: none;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            font-family: 'consolas';
+            color: white;
+
+        }
+
+        .btn.left {
+            left: 50px;
+        }
+
+        .btn.right {
+            right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="roll" id="roll">
+
+        <ul>
+            <li class="no1"><img src="images/v1.jpg" alt=""></li>
+            <li class="no2"><img src="images/v2.jpg" alt=""></li>
+            <li class="no3"><img src="images/v3.jpg" alt=""></li>
+            <li class="no4"><img src="images/v4.jpg" alt=""></li>
+            <li class="no5"><img src="images/v5.jpg" alt=""></li>
+        </ul>
+        <a href="javascript:;" class="left btn" id="left">&lt;</a>
+        <a href="javascript:;" class="right btn" id="right">&gt;</a>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var arr = ['no1', 'no2', 'no3', 'no4', 'no5'];
+        // 点击左按钮
+        $('#left').click(function () {
+            $('ul li').remove();
+            arr.unshift(arr.pop());
+            for (var i = 0; i < arr.length; i++) {
+                $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
+            }
+        })
+        $('#right').click(function () {
+            $('ul li').remove();
+            arr.push(arr.shift())
+            for (var i = 0; i < arr.length; i++) {
+                $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
+            }
+        })
+    </script>
+</body>
+
+</html>
