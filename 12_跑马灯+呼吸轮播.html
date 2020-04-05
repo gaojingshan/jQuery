@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 800px;
+            height: 444px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box ul {
+            width: 800px;
+            height: 444px;
+            list-style: none;
+            position: relative;
+        }
+
+        .box ul li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 800px;
+            height: 444px;
+            display: none;
+        }
+
+        .box ul li.cur {
+            display: block;
+        }
+
+        .box ul li img {
+            width: 800px;
+            height: 444px;
+        }
+
+        .box .mengban {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            width: 700px;
+            height: 76px;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 0px 40px 10px 60px;
+        }
+
+        .box .stage {
+            overflow: hidden;
+            width: 698px;
+            padding-top: 10px;
+        }
+
+        .box ol {
+            list-style: none;
+            width: 7000px;
+        }
+
+        .box ol li {
+            float: left;
+            margin-right: 19px;
+            width: 120px;
+            height: 66px;
+            position: relative;
+        }
+
+        .box ol li a {
+            display: inline-block;
+            width: 120px;
+            height: 66px;
+        }
+
+        .box ol li.cur {
+            border: 2px solid #fff;
+        }
+
+        .box ol li.cur span {
+            display: block;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-bottom-color: #fff;
+            border-top: none;
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            margin-left: -8px;
+        }
+
+        .box ol li img {
+            width: 120px;
+            height: 66px;
+        }
+
+        /* 左右两边的按钮 */
+        .btn {
+            position: absolute;
+            bottom: 16px;
+            width: 31px;
+            height: 46px;
+        }
+
+        .prev {
+            left: 10px;
+            background: url(images/prev.png) no-repeat center center/31px 46px;
+        }
+
+        .prev:hover {
+            background: url(images/prev-h.png) no-repeat center center/31px 46px;
+        }
+
+        .next {
+            right: 10px;
+            background: url(images/next.png) no-repeat center center/31px 46px;
+        }
+
+        .next:hover {
+            background: url(images/next-h.png) no-repeat center center/31px 46px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul>
+            <li class="cur"><a href="javascript:;"><img src="images/0.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="images/1.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="images/2.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="images/3.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="images/4.jpg" alt=""></a></li>
+        </ul>
+        <div class="mengban">
+            <div class="stage">
+                <ol>
+                    <li class="cur"><a href="javascript:;"><span></span><img src="images/0.jpg" alt=""></a></li>
+                    <li><a href="javascript:;"><span></span><img src="images/1.jpg" alt=""></a></li>
+                    <li><a href="javascript:;"><span></span><img src="images/2.jpg" alt=""></a></li>
+                    <li><a href="javascript:;"><span></span><img src="images/3.jpg" alt=""></a></li>
+                    <li><a href="javascript:;"><span></span><img src="images/4.jpg" alt=""></a></li>
+                </ol>
+            </div>
+
+        </div>
+        <a href="javascript:;" id="prev" class="prev btn"></a>
+        <a href="javascript:;" id="next" class="next btn"></a>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        for (var i = 0; i < 5; i++) {
+            $('ol li').eq(i).clone().appendTo('ol');
+        }
+        var index = 0;
+
+        // 鼠标滑动到小图片上的效果
+        $('#box ol li').mouseenter(function () {
+
+            $('#box ul li').eq(index % 5).fadeOut(300);
+            // 获取序号
+            index = $(this).index();
+            $('#box ul li').eq(index % 5).fadeIn(300);
+
+            // 碰到的图片添加cur类，其余移除cur类
+            $('#box ol li').removeClass('cur');
+            $('#box ol li').eq(index).addClass('cur');
+            $('#box ol li').eq(index % 5).addClass('cur');
+            $('#box ol li').eq(index + 5).addClass('cur');
+        })
+
+
+        // 点击左按钮
+        var index2 = 0;
+        $('#prev').click(function () {
+            if (index2 == 5) {
+                index2 = 0;
+                $('ol li').css('left', 0);
+            }
+            index2++;
+            $('ol li').stop(true).animate({ left: -139 * (index2) }, 400)
+        })
+        // 点击右按钮
+        $('#next').click(function () {
+            if (index2 == 0) {
+                index2 = 5;
+                $('ol li').css('left', -139 * 5);
+            }
+            index2--;
+            $('ol li').stop(true).animate({ left: -139 * (index2) }, 400)
+        })
+
+        // 锁
+        var lock = true;
+        setInterval(function () {
+            // 当锁开启时，自动轮播
+            if (lock) {
+                $('#next').trigger('click');
+            }
+        }, 2000)
+        // 当鼠标移动到轮播图上时，关闭定时器
+        $('#box').mouseenter(function () {
+            lock = false;
+        })
+        // 当鼠标不在轮播图上时，开启定时器
+        $('#box').mouseleave(function () {
+            lock = true;
+        })
+    </script>
+</body>
+
+</html>
