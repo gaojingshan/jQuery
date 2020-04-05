@@ -108,18 +108,26 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
+        // 数组中存放着类名
         var arr = ['no1', 'no2', 'no3', 'no4', 'no5'];
         // 点击左按钮
         $('#left').click(function () {
+            // 移除所有li元素
             $('ul li').remove();
+            // 头增加尾删除的元素
             arr.unshift(arr.pop());
+            // 重新遍历ul里面的所有li
             for (var i = 0; i < arr.length; i++) {
                 $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
             }
         })
+        // 点击右按钮
         $('#right').click(function () {
+            // 移除所有li元素
             $('ul li').remove();
+            //  尾增加头删除的元素
             arr.push(arr.shift())
+            // 重新遍历ul里面的所有li
             for (var i = 0; i < arr.length; i++) {
                 $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
             }
