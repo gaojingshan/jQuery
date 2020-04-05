@@ -42,6 +42,16 @@
             position: absolute;
             top: 50%;
             margin-top: -25px;
+            font-size: 40px;
+            text-decoration: none;
+            text-align: center;
+            color: white;
+            line-height: 40px;
+            font-family: 'consolas';
+        }
+        .btn:hover{
+            background-color: red;
+            color: orange;
         }
 
         .leftBtn {
@@ -90,8 +100,8 @@
             <li><img src="images/8.jpg" alt=""></li>
             <li><img src="images/9.jpg" alt=""></li>
         </ul>
-        <a href="javascript:;" id="leftBtn" class="leftBtn btn"></a>
-        <a href="javascript:;" id="rightBtn" class="rightBtn btn"></a>
+        <a href="javascript:;" id="leftBtn" class="leftBtn btn">&lt;</a>
+        <a href="javascript:;" id="rightBtn" class="rightBtn btn">&gt;</a>
         <ol>
             <li class="cur"></li>
             <li></li>
@@ -174,7 +184,7 @@
                 $('#rightBtn').trigger('click');
             }
         }, 2000)
-        
+
         // 鼠标碰到大盒子，就关锁
         $('#carousel').mouseenter(function () {
             lock = false;

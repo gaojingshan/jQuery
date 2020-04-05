@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 400px;
+            margin: 100px auto;
+            cursor: pointer;
+        }
+
+        .box1 {
+            width: 400px;
+            border: 1px solid #cccccc;
+        }
+
+        h3 {
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 32px;
+            margin: 0 10px;
+        }
+
+        .box1>h3 {
+            font-weight: bold;
+        }
+
+        .box1>h3 span {
+
+            transform: rotate(-90deg);
+            display: inline-block;
+            font-family: 'consolas';
+            font-size: 20px;
+            font-weight: normal;
+            float: right;
+            transition: all .1s ease 0s;
+        }
+
+        .box2 h3 span {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-left-color: #ccc;
+            border-right: none;
+            margin-right: 6px;
+            transform: rotate(0deg);
+            transition: all .4s ease 0s;
+        }
+
+        .box3,
+        .box4 {
+            padding-left: 30px;
+        }
+
+        .box2,
+        .box3,
+        .box4 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="box1">
+            <h3>Architectural Patterns<span>&lt;</span></h3>
+            <div class="box2">
+                <h3>App Shell Model</h3>
+            </div>
+        </div>
+        <div class="box1">
+            <h3>Design & User Experience<span>&lt;</span></h3>
+            <div class="box2">
+                <h3><span></span>Designing Great User Experiences</h3>
+                <div class="box3">
+                    <h3>Basics of User Experiences</h3>
+                    <h3>What Makes a Good Mobile Site?</h3>
+                    <h3>Introduction to variable fonts on the web</h3>
+                    <h3>Additional Colors and Icons</h3>
+                </div>
+                <h3><span></span>Accessibility</h3>
+                <div class="box3">
+                    <h3>Overview</h3>
+                    <h3><span></span>Focus</h3>
+                    <div class="box4">
+                        <h3>Introduction to Focus</h3>
+                        <h3>DOM Order Matters</h3>
+                        <h3>Using tabindex</h3>
+                    </div>
+                    <h3><span></span>Semantics Built-in</h3>
+                    <div class="box4">
+                        <p>Introduction to Semantics</p>
+                    </div>
+                    <h3><span></span>Semantics and ARIA</h3>
+                    <div class="box4">
+                        <h3>Introduction to ARIA</h3>
+                    </div>
+                    <h3>Accessible Styles</h3>
+                    <h3>How To Do an Accessibility Review</h3>
+                    <h3>Accessibility for Teams</h3>
+                </div>
+                <h3><span></span>Animations</h3>
+                <div class="box3">
+                    <h3>Animations san</h3>
+                </div>
+                <h3><span></span>Responsive Web Design</h3>
+                <div class="box3">
+                    <h3>Responsive Web Design san</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 最外面的菜单
+        $('.box1>h3').click(function () {
+            if ($(this).next().is(':visible')) {
+                $(this).next().stop(true).slideUp(300);
+                $(this).children('span')[0].style.transform = 'rotate(-90deg)';
+            } else {
+                $(this).next().stop(true).slideDown(300);
+                $(this).children('span')[0].style.transform = 'rotate(90deg)';
+            }
+        })
+        // 里面的菜单
+        $('.box2 h3').click(function () {
+            // 如果h3里面有span才能点击
+            if ($(this).children('span')[0]) {
+                if ($(this).next().is(':visible')) {
+                    $(this).next().stop(true).slideUp(300);
+                    $(this).children('span')[0].style.transform = 'rotate(0deg)';
+                } else {
+                    $(this).next().stop(true).slideDown(300);
+                    $(this).children('span')[0].style.transform = 'rotate(90deg)';
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>
