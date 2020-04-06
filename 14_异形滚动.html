@@ -27,8 +27,7 @@
         .roll ul li {
             width: 240px;
             position: absolute;
-            transition: all 1s ease 0s;
-
+            transition: left .4s ease 0s;
         }
 
         .roll ul img {
@@ -40,30 +39,35 @@
             top: 75px;
             left: 76px;
             transform: scale(.7);
+            z-index: 3;
         }
 
         .no2 {
             top: 70px;
             left: 290px;
             transform: scale(.8);
+            z-index: 5;
         }
 
         .no3 {
             top: 66px;
             left: 530px;
             transform: scale(.9);
+            z-index: 10;
         }
 
         .no4 {
             top: 70px;
-            right: 272px;
+            left: 766px;
             transform: scale(.8);
+            z-index: 5;
         }
 
         .no5 {
             top: 75px;
-            right: 60px;
+            left: 976px;
             transform: scale(.7);
+            z-index: 3;
         }
 
         .btn {
@@ -82,9 +86,11 @@
             color: white;
 
         }
-        .btn:hover{
+
+        .btn:hover {
             background-color: orange;
         }
+
         .btn.left {
             left: 50px;
         }
@@ -97,7 +103,6 @@
 
 <body>
     <div class="roll" id="roll">
-
         <ul>
             <li class="no1"><img src="images/v1.jpg" alt=""></li>
             <li class="no2"><img src="images/v2.jpg" alt=""></li>
@@ -110,28 +115,32 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        // 数组中存放着类名
-        var arr = ['no1', 'no2', 'no3', 'no4', 'no5'];
+        // 数组
+        var arr_next = [];
         // 点击左按钮
         $('#left').click(function () {
-            // 移除所有li元素
-            $('ul li').remove();
+            // 按顺序获取当前元素的所有li的类名
+            for (var i = 0; i < 5; i++) {
+                arr_next.push($('ul li').eq(i).prop('className'))
+            }
             // 头增加尾删除的元素
-            arr.unshift(arr.pop());
-            // 重新遍历ul里面的所有li
-            for (var i = 0; i < arr.length; i++) {
-                $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
+            arr_next.unshift(arr_next.pop());
+            for (var i = 0; i < 5; i++) {
+                // 每个li元素的类名更替变换
+                $('ul li').eq(i).prop('className', arr_next[i]);
             }
         })
         // 点击右按钮
         $('#right').click(function () {
-            // 移除所有li元素
-            $('ul li').remove();
-            //  尾增加头删除的元素
-            arr.push(arr.shift())
-            // 重新遍历ul里面的所有li
-            for (var i = 0; i < arr.length; i++) {
-                $(`<li class="${arr[i]}"><img src="images/v${i + 1}.jpg" alt=""></li>`).appendTo('ul');
+            // 按顺序获取当前元素的所有li的类名
+            for (var i = 0; i < 5; i++) {
+                arr_next.push($('ul li').eq(i).prop('className'))
+            }
+            // 尾增加头删除的元素
+            arr_next.push(arr_next.shift());
+            for (var i = 0; i < 5; i++) {
+                // 每个li元素的类名更替变换
+                $('ul li').eq(i).prop('className', arr_next[i])
             }
         })
     </script>
