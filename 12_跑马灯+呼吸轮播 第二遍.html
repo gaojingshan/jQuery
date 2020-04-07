@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            width: 930px;
+            height: 350px;
+            margin: 50px auto;
+            position: relative;
+            background: black;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: absolute;
+            width: 930px;
+            height: 350px;
+            /* border: 3px solid red; */
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        ul li img {
+            height: 350px;
+            position: absolute;
+            left: 50%;
+            margin-left: -560px;
+
+        }
+
+        .bottom_mask {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 930px;
+            height: 100px;
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000);
+        }
+
+        .bottom_box {
+            width: 600px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -290px;
+        }
+
+        ol {
+            position: relative;
+            /* float: left; */
+            list-style: none;
+            /* margin: 0 10px; */
+            top: 0;
+            width: 1200px;
+        }
+
+        ol li {
+            float: left;
+            margin-right: 12px;
+        }
+
+        ol li.cur {
+            width: 94px;
+            height: 54px;
+            background: url(images/lion.png);
+        }
+
+        ol li img {
+            width: 90px;
+            height: 45px;
+            padding: 7px 2px 2px;
+        }
+
+        .bottom_box .btn {
+            float: right;
+            width: 31px;
+            height: 46px;
+            position: absolute;
+            top: 6px;
+        }
+
+        .bottom_box .leftbtn {
+            background: url(images/prev.png);
+            margin-right: 10px;
+            z-index: 999;
+            left: 0;
+        }
+
+        .bottom_box .leftbtn:hover {
+            background: url(images/prev-h.png);
+        }
+
+        .bottom_box .rightbtn {
+            background: url(images/next.png);
+            margin-left: 10px;
+            z-index: 999;
+            right: 0px;
+        }
+
+        .bottom_box .rightbtn:hover {
+            background: url(images/next-h.png);
+        }
+
+        .bottom_b {
+            margin-left: 41px;
+            width: 518px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel" id="carousel">
+        <ul>
+            <li><a href="#"><img src="images/sohu1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu5.jpg" alt=""></a></li>
+        </ul>
+        <div class="bottom_mask"></div>
+        <div class="bottom_box" id="bottom_box">
+            <a href="javascript:;" class="btn leftbtn" id="leftbtn"></a>
+            <div class="bottom_b">
+                <ol>
+                    <li class="cur"><a href="#"><img src="images/sohu1_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu2_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu3_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu4_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu5_s.jpg" alt=""></a></li>
+                </ol>
+            </div>
+            <a href="javascript:;" class="btn rightbtn" id="rightbtn"></a>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 克隆一份ol
+        $('#bottom_box ol li').clone().appendTo('#bottom_box ol');
+        // 信号量1，当前小图盒子中，第几号图片大头
+        var index = 0;
+        // 信号量2
+        var nowshow = 0;
+
+
+
+        // 右按钮监听
+        $('#rightbtn').click(function () {
+            index++;
+            $('#bottom_box ol').animate({ left: -106 * index }, 100, function () {
+                if (index == 5) {
+                    index = 0;
+                    $('#bottom_box ol').css('left', 0);
+                }
+            });
+        })
+        // 左按钮监听
+        $('#leftbtn').click(function () {
+
+            index--;
+            if (index == -1) {
+                $('#bottom_box ol').css('left', -106 * 5);
+                index = 4;
+            }
+            $('#bottom_box ol').animate({ left: -106 * index }, 100);
+        })
+
+        // 点击小图上面的图片变换
+        $('ol li').mouseenter(function () {
+            render($(this).index() % 5)
+        })
+
+        // 封装图片变换的函数
+        function render(newNowShow) {
+            // 所有大图淡出
+            $('ul li').stop().fadeOut(300);
+            nowshow = newNowShow;
+            // 当前点击的大图淡入
+            $('ul li').eq(nowshow).stop().fadeIn(300);
+            // 给所有小图去掉类名
+            $('ol li').removeClass('cur');
+            // 给当前小图加类名
+            $('ol li').eq(nowshow).addClass('cur');
+            $('ol li').eq(nowshow + 5).addClass('cur');
+        }
+
+        // 加锁
+        var lock = true;
+        // 定时器
+        setInterval(function () {
+            if (!lock) return;
+            $('#rightbtn').trigger('click');
+
+            render((nowshow + 1) % 5);
+        }, 1000);
+
+        $('#carousel').mouseenter(function () {
+            lock = false;
+        })
+        $('#carousel').mouseleave(function () {
+            lock = true;
+        })
+    </script>
+</body>
+
+</html>

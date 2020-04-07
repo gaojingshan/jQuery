@@ -18,6 +18,7 @@
         }
 
         .box1 {
+            position: relative;
             width: 400px;
             border: 1px solid #cccccc;
         }
@@ -33,16 +34,22 @@
             font-weight: bold;
         }
 
-        .box1>h3 span {
-
-            transform: rotate(-90deg);
-            display: inline-block;
-            font-family: 'consolas';
-            font-size: 20px;
-            font-weight: normal;
-            float: right;
+        .box1>h3::after {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            content: '';
+            background: url(images/jt.svg);
+            top: 6px;
+            right: 4px;
+            transform: rotateX(180deg);
             transition: all .1s ease 0s;
         }
+
+        .box1>h3.cur::after {
+            transform: rotateX(0deg);
+        }
+
 
         .box2 h3 span {
             display: inline-block;
@@ -56,6 +63,10 @@
             transition: all .4s ease 0s;
         }
 
+        .box2 h3::before{
+            content: '';
+        }
+
         .box3,
         .box4 {
             padding-left: 30px;
@@ -65,6 +76,7 @@
         .box3,
         .box4 {
             display: none;
+            position: relative;
         }
     </style>
 </head>
@@ -72,13 +84,13 @@
 <body>
     <div class="box" id="box">
         <div class="box1">
-            <h3>Architectural Patterns<span>&lt;</span></h3>
+            <h3>Architectural Patterns</h3>
             <div class="box2">
                 <h3>App Shell Model</h3>
             </div>
         </div>
         <div class="box1">
-            <h3>Design & User Experience<span>&lt;</span></h3>
+            <h3>Design & User Experience</h3>
             <div class="box2">
                 <h3><span></span>Designing Great User Experiences</h3>
                 <div class="box3">
@@ -125,10 +137,10 @@
         $('.box1>h3').click(function () {
             if ($(this).next().is(':visible')) {
                 $(this).next().stop(true).slideUp(300);
-                $(this).children('span')[0].style.transform = 'rotate(-90deg)';
+                $(this).removeClass('cur');
             } else {
                 $(this).next().stop(true).slideDown(300);
-                $(this).children('span')[0].style.transform = 'rotate(90deg)';
+                $(this).addClass('cur');
             }
         })
         // 里面的菜单
