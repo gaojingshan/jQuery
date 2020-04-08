@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,155 +12,346 @@
             padding: 0;
         }
 
-        .box {
-            width: 400px;
-            margin: 100px auto;
+        .menu {
+            border: 1px solid rgb(204, 203, 203);
+            width: 300px;
+            margin: 30px;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 26px;
+        }
+
+        .menu .lev1_h {
             cursor: pointer;
-        }
-
-        .box1 {
             position: relative;
-            width: 400px;
-            border: 1px solid #cccccc;
         }
 
-        h3 {
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 32px;
-            margin: 0 10px;
-        }
-
-        .box1>h3 {
-            font-weight: bold;
-        }
-
-        .box1>h3::after {
-            position: absolute;
+        .menu .lev1_h::after {
+            content: '';
             width: 20px;
             height: 20px;
-            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
             background: url(images/jt.svg);
-            top: 6px;
-            right: 4px;
+            background-size: 100% 100%;
+            transition: all .3s ease 0s;
+        }
+
+        /* 如果有cur属性就旋转 */
+        .menu .lev1_h.cur::after {
             transform: rotateX(180deg);
-            transition: all .1s ease 0s;
         }
 
-        .box1>h3.cur::after {
-            transform: rotateX(0deg);
-        }
-
-
-        .box2 h3 span {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border: 6px solid transparent;
-            border-left-color: #ccc;
-            border-right: none;
-            margin-right: 6px;
-            transform: rotate(0deg);
-            transition: all .4s ease 0s;
-        }
-
-        .box2 h3::before{
-            content: '';
-        }
-
-        .box3,
-        .box4 {
-            padding-left: 30px;
-        }
-
-        .box2,
-        .box3,
-        .box4 {
-            display: none;
+        .menu .lev2_h {
+            cursor: pointer;
             position: relative;
+        }
+
+        .menu .lev2_h:hover {
+            background-color: #eee;
+        }
+
+        .menu .lev2_h::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            background: url(images/jt2.svg);
+            background-size: 100% 100%;
+            transition: all .3s ease 0s;
+        }
+
+        .menu .lev2_h.cur::before {
+            transform: rotate(90deg);
+        }
+
+        .menu .lev3_h {
+            position: relative;
+            cursor: pointer;
+            padding-left: 5px;
+        }
+
+        .menu .lev3_h:hover {
+            background-color: #eee;
+        }
+
+        .menu .havechild .lev3_h::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            background: url(images/jt2.svg);
+            background-size: 100% 100%;
+            transition: all .3s ease 0s;
+        }
+
+        .menu .havechild .lev3_h.cur::before {
+            transform: rotate(90deg);
+        }
+
+        .menu .lev1_b {
+            padding-left: 30px;
+            display: none;
+        }
+
+        .menu .lev1_b .lev2_b {
+            padding-left: 30px;
+            display: none;
+        }
+
+        .menu .lev1_b .lev2_b .lev3_b {
+            padding-left: 30px;
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="box" id="box">
-        <div class="box1">
-            <h3>Architectural Patterns</h3>
-            <div class="box2">
-                <h3>App Shell Model</h3>
+    <div class="menu">
+        <div class="lev1">
+            <div class="lev1_h">河北省</div>
+            <div class="lev1_b">
+                <div class="lev2">
+                    <div class="lev2_h">
+                        石家庄市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3 havechild">
+                            <div class="lev3_h">
+                                长安区
+                            </div>
+                            <div class="lev3_b">
+                                <div class="lev4">
+                                    <div class="lev4_h">长安一街</div>
+                                    <div class="lev4_h">长安二街</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                桥东区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                桥西区
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lev2">
+                    <div class="lev2_h">
+                        保定市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                新市区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                北市区
+                            </div>
+                        </div>
+                        <div class="lev3 havechild">
+                            <div class="lev3_h">
+                                阜平县
+                            </div>
+                            <div class="lev3_b">
+                                <div class="lev4">
+                                    <div class="lev4_h">
+                                        富强镇
+                                    </div>
+                                </div>
+                                <div class="lev4">
+                                    <div class="lev4_h">
+                                        富兴镇
+                                    </div>
+                                </div>
+                                <div class="lev4">
+                                    <div class="lev4_h">
+                                        富美镇
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="box1">
-            <h3>Design & User Experience</h3>
-            <div class="box2">
-                <h3><span></span>Designing Great User Experiences</h3>
-                <div class="box3">
-                    <h3>Basics of User Experiences</h3>
-                    <h3>What Makes a Good Mobile Site?</h3>
-                    <h3>Introduction to variable fonts on the web</h3>
-                    <h3>Additional Colors and Icons</h3>
-                </div>
-                <h3><span></span>Accessibility</h3>
-                <div class="box3">
-                    <h3>Overview</h3>
-                    <h3><span></span>Focus</h3>
-                    <div class="box4">
-                        <h3>Introduction to Focus</h3>
-                        <h3>DOM Order Matters</h3>
-                        <h3>Using tabindex</h3>
+        <div class="lev1">
+            <div class="lev1_h">黑龙江省</div>
+            <div class="lev1_b">
+                <div class="lev2">
+                    <div class="lev2_h">
+                        大庆市
                     </div>
-                    <h3><span></span>Semantics Built-in</h3>
-                    <div class="box4">
-                        <p>Introduction to Semantics</p>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                萨尔图区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                红岗区
+                            </div>
+                        </div>
                     </div>
-                    <h3><span></span>Semantics and ARIA</h3>
-                    <div class="box4">
-                        <h3>Introduction to ARIA</h3>
+                </div>
+                <div class="lev2">
+                    <div class="lev2_h">
+                        伊春市
                     </div>
-                    <h3>Accessible Styles</h3>
-                    <h3>How To Do an Accessibility Review</h3>
-                    <h3>Accessibility for Teams</h3>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                南岔区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                新青区
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3><span></span>Animations</h3>
-                <div class="box3">
-                    <h3>Animations san</h3>
+                <div class="lev2">
+                    <div class="lev2_h">
+                        牡丹江市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                东安区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                阳明区
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h3><span></span>Responsive Web Design</h3>
-                <div class="box3">
-                    <h3>Responsive Web Design san</h3>
+            </div>
+        </div>
+        <div class="lev1">
+            <div class="lev1_h">湖北省</div>
+            <div class="lev1_b">
+                <div class="lev2">
+                    <div class="lev2_h">
+                        武汉市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3 havechild">
+                            <div class="lev3_h">
+                                江岸区
+                            </div>
+                            <div class="lev3_b">
+                                <div class="lev4">
+                                    <div class="lev4_h">
+                                        江岸一街
+                                    </div>
+                                </div>
+                                <div class="lev4">
+                                    <div class="lev4_h">
+                                        江岸二街
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lev2">
+                    <div class="lev2_h">
+                        黄石市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                黄石港区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                石灰窑区
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lev2">
+                    <div class="lev2_h">
+                        十堰市
+                    </div>
+                    <div class="lev2_b">
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                茅箭区
+                            </div>
+                        </div>
+                        <div class="lev3">
+                            <div class="lev3_h">
+                                张湾区
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        // 最外面的菜单
-        $('.box1>h3').click(function () {
-            if ($(this).next().is(':visible')) {
-                $(this).next().stop(true).slideUp(300);
-                $(this).removeClass('cur');
-            } else {
-                $(this).next().stop(true).slideDown(300);
-                $(this).addClass('cur');
-            }
-        })
-        // 里面的菜单
-        $('.box2 h3').click(function () {
-            // 如果h3里面有span才能点击
-            if ($(this).children('span')[0]) {
-                if ($(this).next().is(':visible')) {
-                    $(this).next().stop(true).slideUp(300);
-                    $(this).children('span')[0].style.transform = 'rotate(0deg)';
-                } else {
-                    $(this).next().stop(true).slideDown(300);
-                    $(this).children('span')[0].style.transform = 'rotate(90deg)';
-                }
-            }
-
-        })
-
-
-    </script>
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $('.lev1_h').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.lev1_b').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev1_b这个，合上
+            $(this).siblings('.lev1_b').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev1_b这个，展开
+            $(this).siblings('.lev1_b').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+
+    $('.lev2_h').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.lev2_b').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev2_b这个，合上
+            $(this).siblings('.lev2_b').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev2_b这个，展开
+            $(this).siblings('.lev2_b').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+
+    $('.lev3_h').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.lev3_b').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev3_b这个，合上
+            $(this).siblings('.lev3_b').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev3_b这个，展开
+            $(this).siblings('.lev3_b').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+</script>
 
 </html>
