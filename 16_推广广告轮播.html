@@ -182,15 +182,16 @@
                 // 点击的是当前显示的第几个元素
                 index = $(this).index();
                 if (index == 5) {
-                    $(this).stop(true).animate({ 'left': 187.5 }, 100);
+                    $(this).stop(true).animate({ 'left': 187.5 }, 300);
                 } else {
-                    $(this).stop(true).animate({ 'left': 0 }, 100).siblings().stop(true).animate({ 'left': 927.5 }, 100);
+                    $(this).stop(true).animate({ 'left': 0 }, 300).siblings().stop(true).animate({ 'left': 927.5 }, 300);
                 }
             })
             $('#carousel ul li').mouseleave(function () {
                 if ($(this).is(':animated')) {
                     return;
                 }
+                $(this).children().children('img:nth-child(2)').removeClass('cur');
                 // 离开恢复li
                 $('#carousel ul li').eq(0).css('left', 2.5);
                 $('#carousel ul li').eq(1).css('left', 187.5);
@@ -198,7 +199,6 @@
                 $('#carousel ul li').eq(3).css('left', 557.5);
                 $('#carousel ul li').eq(4).css('left', 742.5);
                 $('#carousel ul li').eq(5).css('left', 927.5);
-                $(this).children().children('img:nth-child(2)').removeClass('cur');
 
             })
         }
