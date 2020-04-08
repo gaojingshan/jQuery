@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            width: 1110px;
+            height: 86px;
+            margin: 50px auto;
+            /* border: 2px solid red; */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel .btn {
+            position: absolute;
+            width: 32px;
+            height: 40px;
+            top: 50%;
+            margin-top: -20px;
+            z-index: 99;
+        }
+
+        .carousel .leftbtn {
+            background: url(images/iqiyi-left.png);
+            left: 0;
+            /* left: -35px; */
+        }
+
+        .carousel .leftbtn:hover {
+            background: url(images/iqiyi-left-hover.png);
+        }
+
+        .carousel ul {
+            list-style: none;
+            width: 11100px;
+            position: absolute;
+        }
+
+        .carousel ul li {
+            float: left;
+            display: none;
+            position: absolute;
+            top: 0;
+
+        }
+
+        .carousel ul li.cur {
+            display: block;
+        }
+
+        .carousel ul li:nth-child(1) {
+            left: 2.5px;
+        }
+
+        .carousel ul li:nth-child(2) {
+            left: 187.5px;
+        }
+
+        .carousel ul li:nth-child(3) {
+            left: 372.5px;
+        }
+
+        .carousel ul li:nth-child(4) {
+            left: 557.5px;
+        }
+
+        .carousel ul li:nth-child(5) {
+            left: 742.5px;
+        }
+
+        .carousel ul li:nth-child(6) {
+            left: 927.5px;
+        }
+
+        .carousel ul li img:nth-child(1) {
+            width: 180px;
+            margin: 0 2.5px;
+        }
+
+        .carousel ul li img:nth-child(2) {
+            height: 86px;
+            display: none;
+        }
+
+        .carousel ul li img:nth-child(2).cur {
+            display: block;
+        }
+
+        .carousel ul li img {
+            float: left;
+        }
+
+        .carousel .rightbtn {
+            background: url(images/iqiyi-right.png);
+            right: 0;
+            /* right: -35px; */
+        }
+
+        .carousel .rightbtn:hover {
+            background: url(images/iqiyi-right-hover.png);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel" id="carousel">
+        <a href="javascript:;" class="leftbtn btn" id="leftbtn"></a>
+        <ul>
+            <!-- <li class="cur"><a href="#"><img src="images/iqiyi1.jpg" alt=""></a></li>
+            <li class="cur"><a href="#"><img src="images/iqiyi2.jpg" alt=""></a></li>
+            <li class="cur"><a href="#"><img src="images/iqiyi3.jpg" alt=""></a></li>
+            <li class="cur"><a href="#"><img src="images/iqiyi4.jpg" alt=""></a></li>
+            <li class="cur"><a href="#"><img src="images/iqiyi5.jpg" alt=""></a></li>
+            <li class="cur"><a href="#"><img src="images/iqiyi6.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi7.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi8.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi9.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi10.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi11.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi12.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi13.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/iqiyi14.jpg" alt=""></a></li> -->
+        </ul>
+        <a href="javascript:;" class="rightbtn btn" id="rightbtn"></a>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 封装随机函数
+        function render() {
+            // 一上来先清空ul里面的li（所有图片）
+            $('#carousel ul li').remove();
+            // 随机变换,序号从1开始，序号0为空。遍历生成6个数字，长度为7。
+            var arr = ['',];
+            while (arr.length < 7) {
+                // 随机变换的量
+                var random = parseInt(Math.random() * 14 + 1);
+                if (!arr.includes(random)) {
+                    arr.push(random);
+                }
+            }
+            for (var i = 1; i < arr.length; i++) {
+                // 显示数组中随机生成的一串数字的图片
+                $(`<li class="cur"><a href="#"><img src="images/iqiyi${arr[i]}.jpg" alt=""><img src="images/iqiyi${arr[i]}_show.jpg" alt=""></a></li>`).appendTo('#carousel ul');
+            }
+        }
+
+        // 一加载页面就调用显示随机的图片
+        render();
+        enter_leave();
+        // 点击右箭头
+        $('#rightbtn').click(function (e) {
+            render();
+            enter_leave();
+        })
+        // 点击左箭头
+        $('#leftbtn').click(function (e) {
+            render();
+            enter_leave();
+            // e.stopPropagation();
+        })
+        var left = 0;
+        var index = 0;
+        // 封装鼠标移动变展开图的函数
+        function enter_leave() {
+            $('#carousel ul li').mouseenter(function () {
+                if ($(this).is(':animated')) {
+                    return;
+                }
+                $(this).children().children('img:nth-child(2)').addClass('cur');
+
+                // 获取之前的li 的left
+                left = $(this).css('left');
+                // 点击的是当前显示的第几个元素
+                index = $(this).index();
+                if (index == 5) {
+                    $(this).stop(true).animate({ 'left': 187.5 }, 100);
+                } else {
+                    $(this).stop(true).animate({ 'left': 0 }, 100).siblings().stop(true).animate({ 'left': 927.5 }, 100);
+                }
+            })
+            $('#carousel ul li').mouseleave(function () {
+                if ($(this).is(':animated')) {
+                    return;
+                }
+                // 离开恢复li
+                $('#carousel ul li').eq(0).css('left', 2.5);
+                $('#carousel ul li').eq(1).css('left', 187.5);
+                $('#carousel ul li').eq(2).css('left', 372.5);
+                $('#carousel ul li').eq(3).css('left', 557.5);
+                $('#carousel ul li').eq(4).css('left', 742.5);
+                $('#carousel ul li').eq(5).css('left', 927.5);
+                $(this).children().children('img:nth-child(2)').removeClass('cur');
+
+            })
+        }
+        /* $('#rightbtn').mouseenter(function (e) {
+            console.log(1);
+
+            e.stopPropagation();
+        }) */
+    </script>
+</body>
+
+</html>
