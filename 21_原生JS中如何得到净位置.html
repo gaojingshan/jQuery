@@ -34,21 +34,26 @@
         </div>
     </div>
     <script>
+        // 原生JS如果要得到元素的净位置，必须写一个事件
+        // window.onload表示页面上的所有元素都加载完毕，包括图片都加载完毕。
         window.onload = function () {
+            // 获取h3元素
             var h3 = document.getElementById('h3');
             // 累加器
             var sum = 0;
             // 让o是h3
             var o = h3;
-
             while (true) {
-                // console.log(o.offsetTop);
+                // 累加器
                 sum += o.offsetTop;
+                // 让o成为自己的定位父亲，这样有点“递归的感觉”
                 o = o.offsetParent;
-                console.log(sum, o);
+                // 如果o是null，或者o的节点类型不是1，就结束循环。1表示节点。
+                // 因为document对象的节点类型不是1，document是一个虚构的根节点
                 if (!o || o.nodeType != 1) break;
             }
-
+            // 显示结果
+            console.log(sum);
         }
     </script>
 </body>
