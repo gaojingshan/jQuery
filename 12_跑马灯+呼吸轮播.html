@@ -12,22 +12,23 @@
         }
 
         .carousel {
-            margin: 20px auto;
+            margin: 50px auto;
             width: 930px;
             height: 350px;
-            border: 2px solid red;
             position: relative;
             overflow: hidden;
+            /* 轮播图的背景颜色是黑色，变换的时候就能看见黑色背景 */
+            background-color: black;
         }
 
         .carousel ul {
             list-style: none;
-            width: 930px;
-            height: 350px;
-            position: relative;
         }
 
+        /* 因为我们只想让图片显示中部，所以可以绝对定位 */
+        /* 当然也可以用背景，结合background-position:center center; */
         .carousel ul li {
+            /* li要绝对定位，因为它是呼吸 */
             position: absolute;
             width: 1120px;
             height: 350px;
@@ -36,33 +37,41 @@
             margin-left: -560px;
         }
 
-        .bottom_mask{
+        .bottom_mask {
             width: 100%;
             height: 100px;
             position: absolute;
             bottom: 0;
-            background: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,1));
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
         }
 
-        .btn{
+        .btn {
             width: 31px;
             height: 46px;
             float: left;
+            position: relative;
+            z-index: 999;
         }
-        .leftbtn{
+
+        .leftbtn {
             background: url(images/prev.png);
             margin-right: 19px;
         }
-        .leftbtn:hover{
+
+        .leftbtn:hover {
             background: url(images/prev-h.png);
         }
-        .rightbtn{
+
+        .rightbtn {
             background: url(images/next.png);
+            float: right;
         }
-        .rightbtn:hover{
+
+        .rightbtn:hover {
             background: url(images/next-h.png);
         }
-        .carousel .bottom{
+
+        .carousel .bottom {
             position: absolute;
             width: 630px;
             height: 45px;
@@ -70,16 +79,34 @@
             left: 50%;
             margin-left: -315px;
         }
-        .carousel ol {
+
+        .bottom .bottom_ol {
             width: 530px;
-            height: 45px;
+            height: 54px;
             float: left;
+            overflow: hidden;
+            position: relative;
+            bottom: 10px;
+        }
+
+        .carousel ol {
+            width: 1100px;
+            height: 45px;
             list-style: none;
+            position: relative;
         }
 
         .carousel ol li {
             float: left;
             margin-right: 12px;
+            padding: 7px 2px 2px;
+            width: 90px;
+            position: relative;
+            height: 45px;
+        }
+
+        .carousel ol li.cur {
+            background: url(images/lion.png) no-repeat;
         }
     </style>
 </head>
@@ -94,22 +121,98 @@
             <li><a href="#"><img src="images/sohu5.jpg" alt=""></a></li>
         </ul>
         <div class="bottom_mask"></div>
-        <div class="bottom">
+        <div class="bottom" id="bottom">
             <a href="javascript:;" class="btn leftbtn" id="leftbtn"></a>
-            <ol>
-                <li><a href="#"><img src="images/sohu1_s.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/sohu2_s.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/sohu3_s.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/sohu4_s.jpg" alt=""></a></li>
-                <li><a href="#"><img src="images/sohu5_s.jpg" alt=""></a></li>
-            </ol>
+            <div class="bottom_ol">
+                <ol>
+                    <li class="cur"><a href="#"><img src="images/sohu1_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu2_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu3_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu4_s.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="images/sohu5_s.jpg" alt=""></a></li>
+                </ol>
+            </div>
             <a href="javascript:;" class="btn rightbtn" id="rightbtn"></a>
         </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 
     <script>
-        
+        // 克隆
+        $('#bottom ol li').clone().appendTo('#bottom ol');
+
+        // 信号量1，当前小图盒子中，第几号图片打头
+        var index = 0;
+        // 信号量2，鼠标当前指向的第几号元素
+        var nowNumber = 0;
+
+        // 提炼变量  变量名以$开头，表示它存的是一个jQuery元素。
+        $ol = $('#bottom ol');
+        $li_s = $('#bottom ol li');
+        $li_b = $('#carousel ul li');
+
+        // 点击右按钮的时候做的事情
+        $('#rightbtn').click(function () {
+            index++;
+            $ol.stop(true).animate({ 'left': -106 * index }, 100, function () {
+                if (index == 5) {
+                    $ol.css('left', 0);
+                    index = 0;
+                }
+            })
+        })
+        // 点击左按钮的时候做的事情
+        $('#leftbtn').click(function () {
+            index--;
+            if (index == -1) {
+                // 瞬间拉回去
+                $ol.css('left', -106 * 5);
+                index = 4;
+            }
+            $ol.stop(true).animate({ 'left': -106 * index }, 100);
+        })
+
+        // 呼吸函数
+        function render(newnowNumber){
+            // 呼吸，让所有的li都淡出，不一定是当前的显示的li，这样可以防止有问题
+            $li_b.stop(true).fadeOut(300);
+            // 得到你触碰的这个元素的序号，当然要除以5取余数
+            // 因为一个我们克隆过，5号就是0号，6号就是1号。除以5取余数，正好。
+            nowNumber = newnowNumber;
+            // 当前点击的图片淡入
+            $li_b.eq(nowNumber).stop(true).fadeIn(300);
+            // 给所有元素去cur
+            $li_s.removeClass('cur');
+            // 加cur，真的和假的都要加cur
+            $li_s.eq(nowNumber).addClass('cur');
+            $li_s.eq(nowNumber + 5).addClass('cur');
+        }
+        // 鼠标触碰小图
+        $li_s.mouseenter(function () {
+            // 直接调用render函数
+            render($(this).index() % 5)
+        })
+
+        // 触碰锁
+        var lock = true;
+        // 定时器
+        setInterval(function () {
+            if (lock) {
+                // 模拟点击右按钮
+                $('#rightbtn').trigger('click');
+                // 调用render函数
+                render((nowNumber + 1) % 5);
+            }
+        }, 2000)
+
+        $('#carousel').mouseenter(function () {
+            lock = false;
+        })
+        $('#carousel').mouseleave(function () {
+            lock = true;
+        })
+
+
     </script>
 </body>
 

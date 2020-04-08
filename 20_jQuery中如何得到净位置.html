@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box1 {
+            position: relative;
+        }
+        .box2 {
+            position: relative;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="box1">
+        <p><img src="images/yangmi/ym1.jpg" alt=""></p>
+        <div class="box2">
+            <p><img src="images/yangmi/ym2.jpg" alt=""></p>
+            <div class="box3">
+                <p><img src="images/yangmi/ym3.jpg" alt=""></p>
+                <h3 id="h3">哈哈，请问我的净位置是几？</h3>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            console.log($('#h3').offset().top);
+        })
+    </script>
+</body>
+</html>

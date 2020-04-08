@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div class="banner" id="banner">
         <p><img src="images/yangmi/ym1.jpg" alt=""></p>
@@ -25,11 +27,12 @@
 
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(window).scroll(function(){
+        // 监听窗口的卷动事件
+        $(window).scroll(function () {
+            // 输出窗口的卷动值
             console.log($(window).scrollTop());
-            
         })
-        
     </script>
 </body>
+
 </html>
