@@ -1,11 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/floor.css">
 </head>
+
 <body>
-    
+    <div class="floor f0" id="f0"></div>
+    <div class="floor f1" id="f1">
+        <h2 class="actor">无惧逆光，<br />笑容绽放</h2>
+        <h3 class="actor">AI HDR+ 以精准的人像分割算法，对面部进行分区域打光优化，配合多帧合成及 AI 智能处理，一如专业打光师，让你的脸部光线更加真实自然，逆光下笑容不再黯然失色。</h3>
+        <img class="model actor" src="images/floor/girl.jpg" alt="">
+    </div>
+    <div class="floor f2" id="f2">
+        <h2>文档拍摄助手</h2>
+        <img src="images/floor/files-1.png" class="files-1">
+        <img src="images/floor/files-2.png" class="files-2">
+        <img src="images/floor/files-3.png" class="files-3">
+    </div>
+    <div class="floor f3" id="f3"></div>
+    <div class="floor f4" id="f4"></div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 获取元素的净位置
+        var f1 = $('#f1').offset().top;
+        var f2 = $('#f2').offset().top;
+        var f3 = $('#f3').offset().top;
+        console.log(f0);
+
+        // 当前是否卷动到f1里面
+        var is_F1_OffsetTop = false;
+        // 当前是否卷动到f2里面
+        var is_F2_OffsetTop = false;
+        $(window).scroll(function () {
+            // 获取页面的卷动值
+            var scrollTop = $(window).scrollTop();
+            // f1
+            if (!is_F1_OffsetTop && scrollTop > f1 - 280 && scrollTop < f2) {
+                is_F1_OffsetTop = true;
+                $('#f1').addClass('cur');
+            } else if (is_F1_OffsetTop && (scrollTop > f2 || scrollTop < f1 - 280)) {
+                is_F1_OffsetTop = false;
+                $('#f1').removeClass('cur');
+            }
+
+            // f2
+            if (!is_F2_OffsetTop && scrollTop > f2 - 280 && scrollTop < f2 + 800) {
+                is_F2_OffsetTop = true;
+                $('#f2').addClass('cur');
+            } else if (is_F2_OffsetTop && (scrollTop > f2 + 800 || scrollTop < f2 - 280)) {
+                is_F2_OffsetTop = false;
+                $('#f2').removeClass('cur');
+            }
+
+        })
+    </script>
 </body>
+
 </html>

@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.f0 {
+    height: 660px;
+    background-color: #eee;
+}
+
+.f1 {
+    height: 600px;
+    background-color: #fff;
+    position: relative;
+}
+
+.f1 h2 {
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    font-size: 70px;
+    top: 61px;
+    transition: all .5s ease 0s;
+    transform: translateY(-100px);
+}
+
+.f1 h3 {
+    position: absolute;
+    left: 50%;
+    margin-left: -510px;
+    font-size: 20px;
+    width: 370px;
+    top: 280px;
+    line-height: 30px;
+    transition: all .5s ease .4s;
+    transform: translateX(-300px);
+}
+
+.f1 .model {
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    margin-left: 0px;
+    font-size: 20px;
+    width: 500px;
+    transition: all .5s ease .4s;
+    transform: scale(0) rotate(360deg);
+}
+
+.f1 .actor {
+    opacity: 0;
+}
+
+.f1.cur .actor {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.f2 {
+    height: 800px;
+    background-color: #000;
+    position: relative;
+}
+.f2 h2{
+    color: #fff;
+    text-align: center;
+    font-size: 50px;
+    padding: 50px 0;
+}
+.f2 img{
+    width: 20%;
+    position: absolute;
+    /* left: 40%; */
+    
+}
+.f2 .files-1{
+    left: 40%;
+    z-index: 999;
+}
+.f2 .files-2{
+    left: 40%;
+    transition: all .4s cubic-bezier(.25,.1,0,1.65) 0s;
+}
+.f2 .files-3{
+    left: 40%;
+    transition: all .4s cubic-bezier(.25,.1,0,1.65) 0s;
+}
+
+.f2.cur .files-2{
+    left: 10%;
+}
+.f2.cur .files-3{
+    left: 70%;
+}
+
+.f3{
+    height: 660px;
+    background-color: #eee;
+}
