@@ -21,7 +21,10 @@
         <img src="images/floor/files-2.png" class="files-2">
         <img src="images/floor/files-3.png" class="files-3">
     </div>
-    <div class="floor f3" id="f3"></div>
+    <div class="floor f3" id="f3">
+        <h2>117° 超大视野，一镜拍下广阔天地</h2>
+        <div class="box" id="f3box"></div>
+    </div>
     <div class="floor f4" id="f4"></div>
 
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -30,21 +33,30 @@
         var f1 = $('#f1').offset().top;
         var f2 = $('#f2').offset().top;
         var f3 = $('#f3').offset().top;
-        console.log(f0);
 
-        // 当前是否卷动到f1里面
+        // 是否已经进入到f1楼层
         var is_F1_OffsetTop = false;
-        // 当前是否卷动到f2里面
+        // 是否已经进入到f2楼层
         var is_F2_OffsetTop = false;
+        // 是否已经进入到f3楼层
+        var is_F3_OffsetTop = false;
+
+        // 监听window对象的scroll事件，当页面卷动的时候触发
         $(window).scroll(function () {
             // 获取页面的卷动值
             var scrollTop = $(window).scrollTop();
             // f1
+             // 判断卷动值，减去280的目的是不一定准确到跟前，就能够视为进入这个楼层了
+            // 写!isInF1的目的是什么呢？？就是只判断一次，只判断进入这个楼层1次
             if (!is_F1_OffsetTop && scrollTop > f1 - 280 && scrollTop < f2) {
+                // 信号量设置为true
                 is_F1_OffsetTop = true;
+                 // 给f1添加类名cur，如果添加类名了，那么里面的演员就会有入场动画了（CSS3有过渡）
                 $('#f1').addClass('cur');
             } else if (is_F1_OffsetTop && (scrollTop > f2 || scrollTop < f1 - 280)) {
+                // 信号量设置为false
                 is_F1_OffsetTop = false;
+                // 给f1去掉类名cur，如果去掉类名了，那么里面的演员就会有入场动画了（CSS3有过渡）
                 $('#f1').removeClass('cur');
             }
 
@@ -55,6 +67,35 @@
             } else if (is_F2_OffsetTop && (scrollTop > f2 + 800 || scrollTop < f2 - 280)) {
                 is_F2_OffsetTop = false;
                 $('#f2').removeClass('cur');
+            }
+            // f3
+            if (!is_F3_OffsetTop && scrollTop > f3 - 280 && scrollTop < f3 + 1660) {
+                is_F3_OffsetTop = true;
+                $('#f3').addClass('cur');
+            } else if (is_F3_OffsetTop && (scrollTop > f3 + 1660 || scrollTop < f3 - 280)) {
+                is_F3_OffsetTop = false;
+                $('#f3').removeClass('cur');
+            }
+
+             // 在楼层3中，微调圆的半径。你距离f3加上280的差是多少，就用这个差乘以3当做圆的直径
+            if (is_F3_OffsetTop) {
+                var r = (scrollTop - f3 + 280) * 3 / 2
+                $('#f3box').css({
+                    'width': 2 * r,
+                    'height': 2 * r,
+                    'margin-left': -r,
+                    'top': $(window).height() / 2 - r
+                })
+
+                // 动态决定自己的opacity
+                var opa = (scrollTop - f3 + 280) / (f3 + 280 + 100) * 3;
+                // console.log(opa);
+
+                $('#f3 h2').css({
+                    'opacity': opa,
+                    'font-size': opa * 50
+                })
+
             }
 
         })

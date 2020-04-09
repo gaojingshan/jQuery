@@ -61,39 +61,73 @@
     background-color: #000;
     position: relative;
 }
-.f2 h2{
+
+.f2 h2 {
     color: #fff;
     text-align: center;
     font-size: 50px;
     padding: 50px 0;
 }
-.f2 img{
+
+.f2 img {
     width: 20%;
     position: absolute;
     /* left: 40%; */
-    
 }
-.f2 .files-1{
+
+.f2 .files-1 {
     left: 40%;
     z-index: 999;
 }
-.f2 .files-2{
+
+.f2 .files-2 {
     left: 40%;
-    transition: all .4s cubic-bezier(.25,.1,0,1.65) 0s;
-}
-.f2 .files-3{
-    left: 40%;
-    transition: all .4s cubic-bezier(.25,.1,0,1.65) 0s;
+    transition: all .4s cubic-bezier(.25, .1, 0, 1.65) 0s;
 }
 
-.f2.cur .files-2{
+.f2 .files-3 {
+    left: 40%;
+    transition: all .4s cubic-bezier(.25, .1, 0, 1.65) 0s;
+}
+
+.f2.cur .files-2 {
     left: 10%;
 }
-.f2.cur .files-3{
+
+.f2.cur .files-3 {
     left: 70%;
 }
 
-.f3{
-    height: 660px;
-    background-color: #eee;
+.f3 {
+    height: 1660px;
+    background-color: rgb(71, 71, 71);
+    position: relative;
+}
+
+.f3 .box {
+    display: none;
+}
+
+.f3.cur .box {
+    position: fixed;
+    display: block;
+    left: 50%;
+    margin-left: 0px;
+    top: 100px;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    background: url(../images/floor/BingWallpaper.jpg) center center no-repeat ;
+}
+
+.f3 h2{
+    position: fixed;
+    z-index: 999;
+    top: 100px;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 50px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+    opacity: 0;
 }
