@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
         .navfix {
             position: fixed;
             right: 100px;
             bottom: 100px;
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(250, 195, 251);
         }
 
         .navfix ul {
@@ -20,6 +25,8 @@
 
         .navfix ul li {
             padding: 10px 0;
+            text-align: center;
+            cursor: pointer;
         }
 
         .navfix ul li.cur {
@@ -35,20 +42,21 @@
 
 <body>
     <div class="wrap">
-        <h3 id="no0">新闻</h3>
+        <h3>新闻</h3>
         <div style="height: 345px; background: #eee;"></div>
-        <h3 id="no1">娱乐</h3>
+        <h3>娱乐</h3>
         <div style="height: 545px; background: #eee;"></div>
-        <h3 id="no2">舞蹈</h3>
+        <h3>舞蹈</h3>
         <div style="height: 645px; background: #eee;"></div>
-        <h3 id="no3">纪录片</h3>
+        <h3>纪录片</h3>
         <div style="height: 335px; background: #eee;"></div>
-        <h3 id="no4">电影</h3>
+        <h3>电影</h3>
         <div style="height: 545px; background: #eee;"></div>
-        <h3 id="no5">热点</h3>
+        <h3>热点</h3>
         <div style="height: 445px; background: #eee;"></div>
-        <h3 id="no6">推荐</h3>
-        <div style="height: 645px; background: #eee;"></div>
+        <h3>推荐</h3>
+        <div style="height: 445px; background: #eee;"></div>
+        <footer style="margin-top: 20px; height: 645px; background: #eee;"></footer>
     </div>
     <div class="navfix" id="navfix">
         <ul>
@@ -63,38 +71,57 @@
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
+        // 一次性把所有的h3的净位置存入到数组中
+        var $h3s = $('h3');
+        // 数组，存储每一个h3元素的净位置
+        var offset_top_arr = [];
+
+        // 对jquery对象（批量对象）应该使用each方法进行遍历
+        // 它的功能就是遍历一个jQuery集合对象
+        $h3s.each(function () {
+            // each就表示遍历每一个，遍历$h3s在里面每一个我们要做什么事情
+            // 每遍历一个，这个$(this)就表示你遍历到的这个h3标签，它是一个jQuery对象。
+            offset_top_arr.push($(this).offset().top)
+        })
+        // 小窍门：往数组的最后一项推入无穷大，因为无穷大要比所有的数字都大，进行if判断的时候更方便。
+        // 为什么方便呢？因为这样不用怕和undefined进行比较了
+
+        offset_top_arr.push(Infinity);
+        console.log(offset_top_arr);
+
+        // 当前我在第几层
+        var nowfloor = 0;
+        // 监听页面的卷动事件
         $(window).scroll(function () {
-            // 输出窗口的卷动值
+            // 得到当前的页面卷动值
             var scroll = $(window).scrollTop();
-
-            var no0 = parseInt($('h3').eq(0).offset().top);
-            var no1 = parseInt($('h3').eq(1).offset().top);
-            var no2 = parseInt($('h3').eq(2).offset().top);
-            var no3 = parseInt($('h3').eq(3).offset().top);
-            var no4 = parseInt($('h3').eq(4).offset().top);
-            var no5 = parseInt($('h3').eq(5).offset().top);
-            var no6 = parseInt($('h3').eq(6).offset().top);
-
-            // 封装函数改变cur类
-            function add(index) {
-                $('#navfix ul li').eq(index).addClass('cur').siblings().removeClass('cur');
+            // 遍历数组，判断用户当前在第几个楼层
+            for (var i = 0; i < offset_top_arr.length; i++) {
+                if (scroll < offset_top_arr[i + 1] - 30) break;
             }
-            if (scroll < no1) {
-                add(0);
-            } else if (scroll < no2) {
-                add(1);
-            } else if (scroll < no3) {
-                add(2);
-            } else if (scroll < no4) {
-                add(3);
-            } else if (scroll < no5) {
-                add(4);
-            } else if (scroll < no6) {
-                add(5);
-            } else {
-                add(6);
+
+            // 如果当前的楼层i和现在的楼层nowfloor不同，则进行楼层切换
+            if (nowfloor != i) {
+                // 改变信号量
+                nowfloor = i;
+                // 切换cur的位置
+                $('#navfix ul li').eq(nowfloor).addClass('cur').siblings().removeClass('cur');
             }
-        });
+        })
+
+        // 点击导航跳转
+        // 给navfix中的所有li添加监听
+        $('#navfix ul li').click(function () {
+            // 判断它是第几个
+            var index = $(this).index();
+
+            // 让页面滚动到这里，这是一个固定写法，为了更好的浏览器兼容
+            $('html, body').animate({
+                'scrollTop': offset_top_arr[index]
+            }, 300)
+        })
+
+
 
     </script>
 </body>
