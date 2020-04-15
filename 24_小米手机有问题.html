@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/xiaomi.css">
+</head>
+
+<body>
+    <div class="floor f0"></div>
+    <div class="floor f1" id="f1">
+        <!-- 弄一个蒙版 -->
+        <div class="phone"></div>
+        <div class="mask"></div>
+        <div class="circle circle1">
+            <h2 id="circle1_h2">hello</h2>
+        </div>
+        <div class="circle2 cur"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+    </div>
+    <div class="floor f2" id="f2"></div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 问题：
+        // CSS精灵技术可以做camera的那个显示与隐藏吗
+        // 如何让用户滚动鼠标的时候停顿一下，把每一个摄像头相应的字显示全，才能继续下一个，上一个隐藏，延时器吗？
+
+        // 获取f1的净位置
+        var f1 = $('#f1').offset().top;
+        var f2 = $('#f2').offset().top;
+        // console.log(f1);
+
+        // 判断现在是否进入到了f1里面
+        var isF1 = false;
+
+        // 获取鼠标滚动值
+        $(window).scroll(function () {
+            var scrollTop = $(window).scrollTop();
+            // console.log(scrollTop);
+
+            if (!isF1 && scrollTop >= f1 && scrollTop < f2) {
+                isF1 = true;
+                // console.log('我进入了f1');
+                $('#f1').addClass('cur');
+            } else if (isF1 && (scrollTop < f1 || scrollTop >= f2)) {
+                isF1 = false;
+                // console.log('我离开了f1');
+                $('#f1').removeClass('cur');
+            }
+
+            // 蒙层的灰度
+            var opa = ((scrollTop - f1) / f1) * 3;
+            // console.log(opa);
+            if (opa < 0.75) {
+                $('#f1 .mask').css('opacity', opa);
+            }
+
+            if (opa >= 0.75 && scrollTop >= f1 && scrollTop < f1 + 300) {
+
+                $('#f1 .circle1').addClass('cur');
+            } else if ((opa < 0.75 || opa > 0.85) && (scrollTop < f1 || scrollTop >= f1 + 300)) {
+                $('#f1 .circle1').removeClass('cur');
+            }
+
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.f0 {
+    height: 600px;
+    background-color: #eee;
+}
+
+.f1 {
+    background-color: black;
+    height: 1000px;
+    position: relative;
+}
+
+.f1 .phone {
+    position: absolute;
+    left: 50%;
+    margin-left: -90px;
+    background: url(../images/floor/phone.jpg) no-repeat center center;
+    width: 743px;
+    height: 671px;
+    background-size: 100%;
+}
+
+.f1.cur .phone {
+    position: fixed;
+    top: 0;
+}
+
+.f1 .mask {
+    position: absolute;
+    left: 50%;
+    margin-left: -90px;
+    width: 743px;
+    height: 671px;
+}
+
+.f1.cur .mask {
+    position: fixed;
+    top: 0;
+    background-color: black;
+    opacity: 0;
+}
+
+.f1 .circle1 {
+    position: absolute;
+    left: 50%;
+    margin-left: 56px;
+    background: url(../images/floor/camera.jpg) no-repeat top center/100px 422px;
+    width: 100px;
+    height: 422px;
+    background-size: 100%;
+    opacity: 0;
+}
+.f1 .circle1.cur {
+    transform: rotate(-4deg);
+    position: fixed;
+    top: 76px;
+    opacity: 1;
+    height: 98px;
+}
+
+.f1 .circle1 h2{
+    color: #fff;
+    opacity: 0;
+    transition: all .5s ease 0s;
+}
+.f1 .circle1.cur h2{
+    opacity: 1;
+}
+
+/* .f1 .circle2 {
+    position: absolute;
+    left: 50%;
+    margin-left: 56px;
+    background: url(../images/floor/camera.jpg) no-repeat top center/100px 422px;
+    width: 100px;
+    height: 422px;
+    background-size: 100%;
+    opacity: 0;
+}
+.f1 .circle2.cur {
+    transform: rotate(-4deg);
+    position: fixed;
+    top: 76px;
+    opacity: 1;
+    height: 98px;
+} */
+
+
+
+.f2 {
+    height: 1000px;
+}
