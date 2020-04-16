@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            width: 1285px;
+            height: 100px;
+            margin: 40px auto;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner ul {
+            list-style: none;
+        }
+
+        .banner li {
+            position: absolute;
+            top: 0;
+            width: 1070px;
+            transition: all .4s ease 0s;
+        }
+        
+
+        .banner li .s {
+            float: left;
+            margin-right: 5px;
+            transition: all .4s ease 0s;
+        }
+
+        .banner li .b {
+            float: left;
+            width: 0;
+            opacity: 0;
+            transition: all .4s ease 0s;
+        }
+
+        .banner li.no0 {
+            left: 0;
+        }
+
+        .banner li.no1 {
+            left: 215px;
+        }
+
+        .banner li.no2 {
+            left: 430px;
+        }
+
+        .banner li.no3 {
+            left: 645px;
+        }
+
+        .banner li.no4 {
+            left: 860px;
+        }
+
+        .banner li.no5 {
+            left: 1075px;
+        }
+
+        .banner li.z{
+            /* 提升权重，让left值是最高的权重 */
+            left: 0 !important;
+        }
+        .banner li.z .b{
+            width: 855px;
+            opacity: 1;
+        }
+        .banner li.z2{
+            left: 215px !important;
+        }
+        .banner li.z2 .b{
+            width: 855px;
+            opacity: 1;
+        }
+        .banner li.z0{
+            left: 0 !important;
+        }
+        .banner li.z0 b{
+            width: 0;
+            opacity: 0;
+        }
+        .banner li.y{
+            left: 1075px !important;
+        }
+        .banner li.y0{
+            left: 1290px !important;
+        }
+        .banner li.y0 .s {
+            width: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+        <ul>
+            <li class="no0">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi1.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi1_show.jpg" alt=""></a>
+                </div>
+            </li>
+            <li class="no1">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi2.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi2_show.jpg" alt=""></a>
+                </div>
+            </li>
+            <li class="no2">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi3.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi3_show.jpg" alt=""></a>
+                </div>
+            </li>
+            <li class="no3">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi4.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi4_show.jpg" alt=""></a>
+                </div>
+            </li>
+            <li class="no4">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi5.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi5_show.jpg" alt=""></a>
+                </div>
+            </li>
+            <li class="no5">
+                <div class="s">
+                    <a href="#"><img src="images/iqiyi6.jpg" alt=""></a>
+                </div>
+                <div class="b">
+                    <a href="#"><img src="images/iqiyi6_show.jpg" alt=""></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 通过类名的改变而实现动画
+        // 添加触摸事件
+        $('#banner ul li').mouseenter(function () {
+            // 得到序号
+            var index = $(this).index();
+            // 当索引不是最后一个的时候
+            if (index <= 4) {
+                // 索引小于触碰的元素
+                for (var i = 0; i < index; i++) {
+                    $('#banner ul li').eq(i).addClass('z0');
+                }
+                // 索引等于触碰的元素
+                $(this).addClass('z');
+
+                // 索引大于触碰的元素1个
+                $('#banner ul li').eq(index + 1).addClass('y');
+                // 索引大于触碰的元素2个
+                for (var i = index + 2; i < 6; i++) {
+                    $('#banner ul li').eq(i).addClass('y0');
+                }
+            } else {
+                // 碰的这个人，加z2类名
+                $(this).addClass('z2');
+                // 比它小的
+                for (var i = 0; i < index; i++) {
+                    $('#banner ul li').eq(i).addClass('z0');
+                }
+            }
+        })
+        // 离开
+        $('#banner ul li').mouseleave(function () {
+            // 得到序号
+            for (var i = 0; i < 6; i++) {
+                $('#banner ul li').eq(i).attr('class', 'no' + i)
+            }
+        })
+    </script>
+</body>
+
+</html>
