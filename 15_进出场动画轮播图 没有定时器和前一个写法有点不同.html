@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            width: 100%;
+            height: 350px;
+            margin-top: 100px;
+            background-color: rgb(201, 163, 58);
+            position: relative;
+            transition: all .3s ease 0s;
+        }
+
+        .banner ul {
+            list-style: none;
+        }
+
+        .banner ul li {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 350px;
+        }
+
+        .banner ul li.no0 {
+            position: absolute;
+            left: 50%;
+            margin-left: -960px;
+            width: 1920px;
+            height: 350px;
+            background: url(images/game1.png);
+            opacity: 1;
+        }
+
+        .banner ul li.no1 {
+            background: rgb(201, 163, 58);
+        }
+
+        .banner ul li.no1 .bg {
+            position: absolute;
+            left: 50%;
+            margin-left: -490px;
+            width: 980px;
+            height: 350px;
+            background: url(images/game2.png);
+
+        }
+
+        .banner ul li.no2 {
+            background: rgb(180, 135, 78);
+        }
+
+        .banner ul li.no2 .bg {
+            position: absolute;
+            left: 50%;
+            margin-left: -490px;
+            width: 980px;
+            height: 350px;
+            background: url(images/game3.png);
+
+        }
+
+        .banner ol {
+            position: absolute;
+            left: 50%;
+            top: 140px;
+            width: 30px;
+            height: 200px;
+            list-style: none;
+            /* 从屏幕中线挤过去 */
+            margin-left: 400px;
+        }
+
+        .banner ol li {
+            width: 20px;
+            height: 20px;
+            background-color: orange;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .banner ol li.cur {
+            background-color: red;
+        }
+
+        .banner .no0 .boy {
+            position: absolute;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -550px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: scale(0) rotate(360deg);
+            transition: all .8s ease 0s;
+        }
+
+        .banner .no0.cur .boy {
+            /* 有cur类就为1倍显示 */
+            transform: scale(1) rotate(0deg);
+        }
+
+        .banner .no0 .pangzi {
+            position: absolute;
+            left: 50%;
+            margin-top: 66px;
+            margin-left: -270px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: scale(0);
+            transition: all .8s ease 0s;
+        }
+
+        .banner .no0.cur .pangzi {
+            /* 有cur类就为1倍显示 */
+            transform: scale(1);
+        }
+
+        .banner .no0 .xjcs {
+            position: absolute;
+            left: 50%;
+            margin-top: 60px;
+            margin-left: 10px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: translateY(-400px);
+            transition: all 1.0s ease .5s;
+            width: 380px;
+        }
+
+        .banner .no0.cur .xjcs {
+            /* 有cur类就删除translateY */
+            transform: translateY(0px);
+        }
+
+        .banner .no1 .ninja {
+            position: absolute;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -550px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: translateX(-1000px);
+            transition: all 1.4s ease 0s;
+        }
+
+        .banner .no1.cur .ninja {
+            /* 有cur类就删除translateX */
+            transform: translateX(0px);
+        }
+
+        .banner .no1 .pljh {
+            position: absolute;
+            left: 50%;
+            margin-top: 60px;
+            margin-left: 10px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: translateY(-400px);
+            transition: all 1.0s ease .5s;
+        }
+
+        .banner .no1.cur .pljh {
+            /* 有cur类就删除translateY */
+            transform: translateY(0px);
+        }
+
+
+
+        .banner .no2 .cike {
+            position: absolute;
+            left: 50%;
+            margin-top: -30px;
+            margin-left: -610px;
+            /* 没有cur类就缩小为0倍显示 */
+            transition: all 1.0s ease .5s;
+            transform: scale(0)
+        }
+
+        .banner .no2.cur .cike {
+            /* 有cur类 */
+            transform: scale(1);
+        }
+
+        .banner .no2 .sgzj {
+            position: absolute;
+            left: 50%;
+            margin-top: 60px;
+            margin-left: 10px;
+            /* 没有cur类就缩小为0倍显示 */
+            transform: translateY(-400px);
+            transition: all 1.0s ease .5s;
+        }
+
+        .banner .no2.cur .sgzj {
+            /* 有cur类就删除translateY */
+            transform: translateY(0px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <ul>
+            <li class="no0 cur">
+                <img src="images/game1_1.png" class="boy" alt="">
+                <img src="images/game1_2.png" class="xjcs" alt="">
+                <img src="images/game1_3.png" class="pangzi" alt="">
+            </li>
+            <li class="no1">
+                <div class="bg"></div>
+                <img src="images/game2_1.png" class="ninja">
+                <img src="images/game2_2.png" class="pljh">
+            </li>
+            <li class="no2">
+                <div class="bg"></div>
+                <img src="images/game3_1.png" class="cike">
+                <img src="images/game3_2.png" class="sgzj">
+            </li>
+        </ul>
+        <ol>
+            <li class="cur"></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var idx = 0;
+
+        // 小圆点的点击事件
+        $('ol li').click(function () {
+            // 所有li都淡出
+            $('.banner ul li').animate({ 'opacity': 0 });
+            // 改变信号量
+            idx = $(this).index();
+            // 当前这个idx这个li，淡入
+            $('.banner ul li').eq(idx).animate({ 'opacity': 1 });
+            // 改变li的cur，cur引发CSS3的进场效果
+            $('.banner ul li').eq(idx).addClass('cur').siblings().removeClass('cur');
+            // 小圆点的cur改变
+            $(this).addClass('cur').siblings().removeClass('cur');
+        });
+    </script>
+</body>
+
+</html>

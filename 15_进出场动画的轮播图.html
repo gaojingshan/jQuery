@@ -12,6 +12,7 @@
         }
 
         .carousel {
+            width: 100%;
             padding-top: 50px;
             height: 351px;
             position: relative;
@@ -19,6 +20,7 @@
         }
 
         .carousel ul {
+            width: 100%;
             list-style: none;
             position: relative;
             height: 351px;
@@ -43,6 +45,7 @@
             background: rgb(201, 163, 58) url(images/game1.png) no-repeat center left;
         }
 
+        /* 图片的这些定位最好从中线拉，这样保证不同尺寸的设备，看到的效果都不会歪 */
         .carousel ul li:nth-child(1) img:nth-child(1) {
             width: 330px;
             top: -26px;
@@ -138,7 +141,9 @@
         .carousel ol {
             list-style: none;
             position: absolute;
-            right: 30px;
+            left: 50%;
+            /* 从屏幕中线挤过去 */
+            margin-left: 500px;
             top: 50%;
             margin-top: -29px;
         }
