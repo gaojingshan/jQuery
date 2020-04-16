@@ -6,143 +6,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
+         * {
             margin: 0;
             padding: 0;
         }
 
-        .roll {
+        .carousel {
+            width: 1200px;
+            height: 500px;
             position: relative;
-            width: 1276px;
-            height: 474px;
+            margin: 40px auto;
         }
 
-        .roll ul {
+        .carousel ul {
             list-style: none;
-            width: 1276px;
-            height: 474px;
-            position: relative;
         }
 
-        .roll ul li {
-            width: 240px;
+        .carousel li {
+            background: url(images/feedback_bg.png);
+            background-size: 100% 100%;
             position: absolute;
-            transition: left .4s ease 0s;
-        }
-
-        .roll ul img {
-            border-radius: 20px;
-            width: 240px;
-        }
-
-        .no1 {
-            top: 75px;
-            left: 76px;
-            transform: scale(.7);
-            z-index: 3;
-        }
-
-        .no2 {
-            top: 70px;
-            left: 290px;
-            transform: scale(.8);
-            z-index: 5;
-        }
-
-        .no3 {
-            top: 66px;
-            left: 530px;
-            transform: scale(.9);
-            z-index: 10;
-        }
-
-        .no4 {
-            top: 70px;
-            left: 766px;
-            transform: scale(.8);
-            z-index: 5;
-        }
-
-        .no5 {
-            top: 75px;
-            left: 976px;
-            transform: scale(.7);
-            z-index: 3;
-        }
-
-        .btn {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #aaa;
-            top: 50%;
-            margin-top: 36px;
-            text-decoration: none;
-            font-size: 20px;
-            line-height: 30px;
+            bottom: 0;
             text-align: center;
-            font-family: 'consolas';
-            color: white;
-
+            font-size: 50px;
+            line-height: 180px;
+            opacity: 0;
+            transition: all .5s ease 0s;
         }
 
-        .btn:hover {
-            background-color: orange;
+        .carousel li img {
+            width: 93%;
+            height: 100%;
         }
 
-        .btn.left {
-            left: 50px;
+        .carousel li.no0 {
+            width: 70px;
+            height: 146px;
+            left: -70px;
         }
 
-        .btn.right {
-            right: 50px;
+        .carousel li.no1 {
+            width: 120px;
+            height: 250px;
+            left: 13%;
+            margin-left: -60px;
+            opacity: 1;
+            padding-top: 34px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .carousel li.no2 {
+            width: 170px;
+            height: 354px;
+            left: 30%;
+            margin-left: -85px;
+            opacity: 1;
+            padding-top: 48px;
+            padding-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        .carousel li.no3 {
+            width: 220px;
+            height: 461px;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 1;
+            padding-top: 62px;
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+
+        .carousel li.no4 {
+            width: 170px;
+            height: 354px;
+            left: 70%;
+            margin-left: -85px;
+            opacity: 1;
+            padding-top: 48px;
+            padding-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        .carousel li.no5 {
+            width: 120px;
+            height: 250px;
+            left: 87%;
+            margin-left: -60px;
+            opacity: 1;
+            padding-top: 34px;
+            padding-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .carousel li.no6 {
+            width: 70px;
+            height: 146px;
+            left: 100%;
         }
     </style>
 </head>
 
 <body>
-    <div class="roll" id="roll">
+    <div class="carousel" id="carousel">
         <ul>
-            <li class="no1"><img src="images/v1.jpg" alt=""></li>
-            <li class="no2"><img src="images/v2.jpg" alt=""></li>
-            <li class="no3"><img src="images/v3.jpg" alt=""></li>
-            <li class="no4"><img src="images/v4.jpg" alt=""></li>
-            <li class="no5"><img src="images/v5.jpg" alt=""></li>
+            <li class="no0">0</li>
+            <li class="no1">1
+                <!-- <img src="images/0.jpg" alt=""> -->
+            </li>
+            <li class="no2">2</li>
+            <li class="no3">3</li>
+            <li class="no4">4</li>
+            <li class="no5">5</li>
+            <li class="no6">6</li>
+            <li class="">7</li>
+            <li class="">8</li>
+            <li class="">9</li>
+            <li class="">10</li>
+            <li class="">11</li>
+            <li class="">12</li>
         </ul>
-        <a href="javascript:;" class="left btn" id="left">&lt;</a>
-        <a href="javascript:;" class="right btn" id="right">&gt;</a>
+        <button id="leftbtn">左按钮</button>
+        <button id="rightbtn">右按钮</button>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        // 数组
-        var arr_next = [];
-        // 点击左按钮
-        $('#left').click(function () {
-            // 按顺序获取当前元素的所有li的类名
-            for (var i = 0; i < 5; i++) {
-                arr_next.push($('ul li').eq(i).prop('className'))
+        var arr = ['no0', 'no1', 'no2', 'no3', 'no4', 'no5', 'no6'];
+        // 得到li
+        var $lis = $('#carousel li');
+        // 给数组添加空字符串，长度要和li的长度相等
+        for (var i = 0; i < $lis.length; i++) {
+            if (arr.length < $lis.length) {
+                arr.push('');
             }
-            // 头增加尾删除的元素
-            arr_next.unshift(arr_next.pop());
-            for (var i = 0; i < 5; i++) {
-                // 每个li元素的类名更替变换
-                $('ul li').eq(i).prop('className', arr_next[i]);
-            }
-        })
+        }
+        // 节流锁,什么是节流？就是让函数不要快速重复触发
+        var lock = true;
         // 点击右按钮
-        $('#right').click(function () {
-            // 按顺序获取当前元素的所有li的类名
-            for (var i = 0; i < 5; i++) {
-                arr_next.push($('ul li').eq(i).prop('className'))
-            }
-            // 尾增加头删除的元素
-            arr_next.push(arr_next.shift());
-            for (var i = 0; i < 5; i++) {
-                // 每个li元素的类名更替变换
-                $('ul li').eq(i).prop('className', arr_next[i])
+        $('#rightbtn').click(function () {
+            // 如果锁没开，那么就什么都不做
+            if (!lock) return;
+            // 进来了就关锁
+            lock = false;
+            // 设置一个延时器，300毫秒之后再次开锁
+            setTimeout(function () {
+                // 300毫秒之后把锁打开
+                lock = true;
+            }, 300)
+            // 队首删除一项，并且把这项插入到队尾
+            arr.push(arr.shift());
+            // 遍历每个li，让每个li成为对应项的类名
+            for (var i = 0; i < $lis.length; i++) {
+                // 让第i个li成为数组中第i项的类名！
+                $lis.eq(i).attr('class', arr[i])
             }
         })
+        // 点击左按钮
+        $('#leftbtn').click(function () {
+            // 如果锁没开，那么就什么都不做
+            if (!lock) return;
+            // 进来了就关锁
+            lock = false;
+            // 设置一个延时器，300毫秒之后再次开锁
+            setTimeout(function () {
+                // 300毫秒之后把锁打开
+                lock = true;
+            }, 300)
+            // 队尾删除一项，并且把这项插入到队首
+            arr.unshift(arr.pop());
+            // 遍历每个li，让每个li成为对应项的类名
+            for (var i = 0; i < $lis.length; i++) {
+                // 让第i个li成为数组中第i项的类名！
+                $lis.eq(i).attr('class', arr[i])
+            }
+        })
+
+        // 触碰锁
+        var touchlock = true;
+        $('#carousel').mouseenter(function () {
+            touchlock = false;
+        })
+        $('#carousel').mouseleave(function () {
+            touchlock = true;
+        })
+        // 定时器
+        setInterval(function () {
+            if (!touchlock) return;
+            // 模拟点击右按钮
+            $('#rightbtn').trigger('click');
+        }, 2000)
+
     </script>
 </body>
 
